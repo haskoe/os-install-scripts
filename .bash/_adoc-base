@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+[[ "$#" -ne 2 ]] && echo "syntax: adoc-$1.sh <name of asciidoc file>" && exit 1
+
+#. _common.sh ${BASH_SOURCE[0]}
+
+DOC_PATH=$(dirname `realpath $2`)
+DOC_FILE=$(basename $2)
+DOC_FILE_WO_EXT=$(basename -s .adoc $2)
+
+ROOT_DOC_PATH=$DOC_PATH
+DOC_REL_PATH=.
+[[ ! -f ${DOC_PATH}/global-attrs.adoc ]] && ROOT_DOC_PATH=$DOC_PATH/..
+[[ ! -f ${DOC_PATH}/global-attrs.adoc ]] && DOC_REL_PATH=`echo $DOC_PATH | awk -F '/' '{print $NF}'`
+DOCKER_DOC_FILE=${DOC_REL_PATH}/${DOC_FILE}
+
+# echo $2
+# echo $DOC_PATH
+# echo $DOC_FILE
+# echo $DOC_FILE_WO_EXT
+
+ANSLAG='0'
+#[[ $(grep ^include..[0-9] $2) ]] && ANSLAG=$(cat $(grep ^include..[0-9] $2 | sed -e 's/^include..//g' | sed -e 's/..$//g') | tr -d '[:space:] ' | wc -c)
+#echo ":anslag: ${ANSLAG}">${DOC_PATH}/dyn-doc-attrs.adoc 
+
+if [ "$1" == "pdf" ]; then
+    docker run --rm -v ${ROOT_DOC_PATH}:/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf ${DOCKER_DOC_FILE} -r asciidoctor-diagram # -r asciidoctor-bibtex
+else
+    docker run --rm -v ${ROOT_DOC_PATH}:/documents/ asciidoctor/docker-asciidoctor asciidoctor ${DOCKER_DOC_FILE} -b docbook -a 'idprefix=' -a 'idseparator=-' -r asciidoctor-diagram # -r asciidoctor-bibtex 
+    pandoc ${DOC_PATH}/${DOC_FILE_WO_EXT}.xml --toc --from docbook --to docx --output ${DOC_PATH}/${DOC_FILE_WO_EXT}.docx 
+    rm -f ${DOC_PATH}/${DOC_FILE_WO_EXT}.xml
+fi

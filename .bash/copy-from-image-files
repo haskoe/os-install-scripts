@@ -1,0 +1,75 @@
+#!/bin/bash
+
+#. _common.sh ${BASH_SOURCE[0]}
+
+IMG_DIR=/media/heas/SSD
+export ORG_DEST=/media/heas/Expansion/organize
+export ORG_SRC=/mnt/lp1
+
+LOG_FILE=~/copy-from-image-files.log
+echo Starting copy-from-image-files >${LOG_FILE}
+for img in ST3808110AS_5LR87NH3-tomw7-defekt.img ST9500325AS_S2W282GN.img
+do
+    echo $(date) Image: ${img} >>${LOG_FILE}
+
+    echo sudo losetup -Pf ${IMG_DIR}/${img}
+    sudo losetup -Pf ${IMG_DIR}/${img}
+    LOOP_DEV_1=$(lsblk | grep loop.*p1)
+    [[ -z $LOOP_DEV_1 ]] && break
+    LOOP_DEV=/dev/loop$(echo $LOOP_DEV_1 | sed -e 's/^.*loop//' | sed -e 's/p1.*$//')
+
+    echo $(date) $(sudo kpartx -l ${LOOP_DEV}) >>${LOG_FILE}
+    readarray -t parts < <(sudo kpartx -l ${LOOP_DEV})
+    for part in "${parts[@]}"
+    do
+	LOOP_PART=/dev/$(echo $part | sed -e 's/\s.*$//')
+	echo sudo mount ${LOOP_PART} /mnt/lp1
+	echo $(date) mounting ${LOOP_PART}
+	sudo mount ${LOOP_PART} /mnt/lp1 >>${LOG_FILE}
+
+        echo organize run --tags=copyimagenoexif,copybyexifdate,copymimetypeexit,copybyexifmodel
+        organize run --tags=copyimagenoexif,copybyexifdate,copymimetypeexit,copybyexifmodel
+
+	echo sudo umount /mnt/lp1
+	sudo umount /mnt/lp1
+    done
+       
+    echo sudo losetup -d ${LOOP_DEV}
+    sudo losetup -d ${LOOP_DEV}
+done   
+exit 1
+
+#[[ ! -f "/dev/$1" ]] && echo invalid disk && exit 1
+DISK_DEV=$1
+
+# find image backup path
+for postfix in "1" ""
+do
+    BACKUP_DIR=/media/${USER}/Expansion${postfix}/disk_backup
+    echo ${BACKUP_DIR}
+    [[ -d "${BACKUP_DIR}" ]] && break
+done
+[[ ! -d "${BACKUP_DIR}" ]] && echo no image backup destination && exit 1
+
+# get disk serial and size
+DISK_SERIAL=$(udevadm info --query=all --name=/dev/sda | grep ID_SERIAL= | sed -e 's/^.*=//g')
+DISK_SIZE=$(numfmt --to iec --format "%8.4f" $(sudo blockdev --getsz /dev/${DISK_DEV}))
+
+# file with image backups, used to get a unique id (line number)
+#IMG_LIST_FILE=${BACKUP_DIR}/imglist.txt
+#[ ! -f "${IMG_LIST_FILE}" ] && touch ${IMG_LIST_FILE}
+
+FILE_NAME=${DISK_SERIAL} #_${DISK_SIZE}
+echo $FILE_NAME
+if compgen -G "${BACKUP_DIR}/${FILE_NAME}*" > /dev/null; then
+    echo "image file exists"
+    exit 1
+fi
+
+TGT_DIR=/media/${USER}/SSD
+IMG_FILE_NAME=${DISK_SERIAL}
+
+echo sudo ddrescue -d -r0 -e +0 -T 1s -n /dev/$1 ${TGT_DIR}/${IMG_FILE_NAME}.img ${TGT_DIR}/${IMG_FILE_NAME}.logfile
+[[ ! -z "$2" ]] && exit 1
+sudo ddrescue -d -r0 -n /dev/$1 ${TGT_DIR}/${IMG_FILE_NAME}.img ${TGT_DIR}/${IMG_FILE_NAME}.logfile
+~/zstd -9 ${TGT_DIR}/${IMG_FILE_NAME}.img -o ${BACKUP_DIR}/${IMG_FILE_NAME}.img.zst

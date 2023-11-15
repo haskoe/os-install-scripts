@@ -1,0 +1,3 @@
+#!/bin/bash
+
+do-git-repos "git status | grep -q ing.to.co && echo '' || cat .git/config | grep url || echo ' changes'" $1 | grep .

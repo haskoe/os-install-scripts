@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+[[ "$#" -ne 1 ]] && echo "syntax: adoc-$1.sh <name of asciidoc file>" && exit 1
+
+#docker run -v {{ migration dir }}:/migrations --network host migrate/migrate -path=/migrations/ -database postgres://localhost:5432/database up 2
+MIGR_DIR=$(dirname `realpath $1`)
+echo $MIGR_DIR
+
+docker run -v ${MIGR_DIR}/migrations:/migrations --network host migrate/migrate -path=/migrations/ -database postgres://heas@localhost:5432/$1?sslmode=disable up $2

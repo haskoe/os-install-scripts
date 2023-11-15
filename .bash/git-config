@@ -1,0 +1,3 @@
+#!/bin/bash
+
+do-git-repos "cat .git/config | grep url" $1

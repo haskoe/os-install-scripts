@@ -1,0 +1,28 @@
+#!/bin/bash
+
+azure_id=$1
+
+tgt_dir=$3
+[[ ! -d $tgt_dir ]] && echo "target dir does not exist" && exit 1
+
+repo_file=$2
+[[ ! -f $repo_file ]] && echo "repo file does not exist" && exit 1
+
+curdir=`pwd`
+
+cat $repo_file | while read line
+do
+    arr=($line)
+    proj=${arr[0]}
+    proj_lower="${proj,,}"
+    repo=${arr[1]}
+    repo_lower="${repo,,}"
+    proj_dir="$tgt_dir/$proj_lower"
+    [[ ! -d $proj_dir ]] && mkdir $proj_dir
+    cd $proj_dir
+    git_config="${proj_dir}/${repo_lower}/.git/config"
+    clone_url="https://${azure_id}@dev.azure.com/${azure_id}/${proj}/_git/${repo}"
+    [[ ! -f $git_config ]] && git clone $clone_url $repo_lower
+done
+
+cd $curdir

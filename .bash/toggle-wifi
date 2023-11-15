@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+if [[ "$(sudo nmcli radio wifi)" == "disabled" ]]; then sudo nmcli radio wifi on; else sudo nmcli radio wifi off; fi

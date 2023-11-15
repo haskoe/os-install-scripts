@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# if gpg credential store helper is used
+export GPG_TTY=$(tty)
+
+TEMP_FILE="$(mktemp)" || exit 1
+fd -H -t d ^.git$ $2 >$TEMP_FILE
+[[ -s $TEMP_FILE ]] && apply-temp-file $TEMP_FILE "$1"
+rm $TEMP_FILE

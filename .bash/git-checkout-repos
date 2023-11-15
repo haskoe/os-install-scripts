@@ -1,0 +1,3 @@
+#!/bin/bash
+
+do-git-repos "git checkout $1" $2
