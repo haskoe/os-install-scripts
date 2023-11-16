@@ -47,6 +47,8 @@ sudo systemctl enable ssh
 curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 
+# .bashrc
+echo ". ${HOME}/dev/haskoe/os-install-scripts/.bash/.bashrc" >>~/.bashrc
 echo 'eval `keychain --eval --agents ssh id_${HOSTNAME}`' | tee -a ~/.bashrc 
 echo "export PATH=\$PATH:${HOME}/dev/haskoe/os-install-scripts/.bash:${HOME}/dev/azure-repos/cs/tools/db/unix" | tee -a ~/.bashrc 
 source ~/.bashrc 
