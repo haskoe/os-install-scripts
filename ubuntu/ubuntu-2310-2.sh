@@ -22,8 +22,7 @@ ssh_fname=id_${HOSTNAME}
 ssh-keygen -f ~/.ssh/${ssh_fname}
 
 sudo snap install chromium
-
-sudo update-alternatives --install .....
+sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /snap/bin/chromium 210
 sudo update-alternatives --config x-www-browser
 
 sudo snap install code --classic
