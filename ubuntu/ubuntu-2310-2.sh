@@ -86,7 +86,7 @@ multipass exec $VM_NAME  -- bash -c "sudo cp /share/rbw* /usr/local/bin"
 multipass shell $VM_NAME
 
 
-ASDF_BRANCH=v0.12.0
+ASDF_BRANCH=v0.13.1
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 tee -a ~/.bashrc <<-EOF
 . "$HOME/.asdf/asdf.sh"
@@ -95,15 +95,15 @@ EOF
 source ~/.bashrc
 
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 
 asdf list all erlang
-ERLANG_VER=26.0.2
+ERLANG_VER=26.1.2
 asdf install erlang ${ERLANG_VER}
 asdf global erlang ${ERLANG_VER}
 
 asdf list all elixir
-ELIXIR_VER=1.15.4-otp-26
+ELIXIR_VER=1.15.7-otp-26
 asdf install elixir ${ELIXIR_VER}
 asdf global elixir ${ELIXIR_VER}
 
