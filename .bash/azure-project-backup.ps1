@@ -1,15 +1,20 @@
 function restGet {
-    $json = Invoke-RestMethod -Uri $url -Method Get -ContentType "application/json" -Headers $auth
-    return $json
+    try {
+        $json = Invoke-RestMethod -Uri $url -Method Get -ContentType "application/json" -Headers $auth
+        return $json
+    }
+    catch {
+        Write-Host $url
+    }
 }
 
-$doDownload = $false
+$doDownload = $true
 $orgName = ''
 
 $MyPat = ''
 $B64Pat = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("`:$MyPat"))
 $auth = @{}
-#$auth = @{ Authorization = "Basic $B64Pat" }
+$auth = @{ Authorization = "Basic $B64Pat" }
 
 
 $rootDir = Join-Path $env:HOME "proj"
@@ -26,8 +31,8 @@ $output = @()
 $pathPrefix = "/home/heas/proj/$orgName"
 
 $projects.value | Sort-Object { $_.Name } | % {
-    $projName = $_.Name
-    $projPath = Join-Path $backupRootPath $projName
+    $projName = ($_.Name).ToLower()
+    $projPath = (Join-Path $backupRootPath $projName).ToLower()
     New-Item -ErrorAction SilentlyContinue -ItemType Directory -Path $projPath
     Set-Location $projPath
 
@@ -52,7 +57,7 @@ $projects.value | Sort-Object { $_.Name } | % {
     New-Item -ErrorAction SilentlyContinue -ItemType Directory $pipelinePath
     Set-Location $pipelinePath
     $url = $urlbase + "/$projName/_apis/pipelines?api-version=7.0"
-    if ($doDownload) {
+    if ($false) {
         $response = Invoke-RestMethod -Uri $url -Method Get -ContentType "application/json" -Headers @{ Authorization = "Basic $B64Pat" }    
         $response.value | % {
             $id = $_.id
@@ -68,7 +73,7 @@ $projects.value | Sort-Object { $_.Name } | % {
     New-Item -ErrorAction SilentlyContinue -ItemType Directory $releasesPath
     Set-Location $releasesPath
     $url = $vrsmurlbase + "/$projName/_apis/release/definitions?api-version=7.0"
-    if ($doDownload) {
+    if ($false) {
         $response = Invoke-RestMethod -Uri $url -Method Get -ContentType "application/json" -Headers @{ Authorization = "Basic $B64Pat" }    
         $response.value | % {
             $id = $_.id
