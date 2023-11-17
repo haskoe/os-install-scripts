@@ -1,0 +1,6 @@
+# py 3.12, vscode, rustdesk
+winget install -e --id Python.Python.3.12
+winget install -e --id Microsoft.VisualStudioCode
+winget install --id=RustDesk.RustDesk  -e
+
+
