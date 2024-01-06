@@ -1,0 +1,65 @@
+# ssh root@bvm
+apt update && apt dist-upgrade
+# reboot
+
+# ssh root@bvm
+USERNAME=....
+adduser $USERNAME
+usermod -a -G sudo $USERNAME
+apt install -y sudo git emacs-nox
+
+# passwordless sudo
+
+# docker
+# Add Docker's official GPG key:
+apt install -y ca-certificates curl gnupg
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update -y
+
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+usermod -aG docker $USER
+docker run hello-world
+
+CONF_FILE=/etc/ssh/sshd_config.d/hardened.conf
+echo PermitRootLogin no | sudo tee $CONF_FILE
+echo PubkeyAuthentication yes | sudo tee -a $CONF_FILE
+echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE
+echo PasswordAuthentication no | sudo tee -a $CONF_FILE
+perl -pibak -e 's/^PermitRootLogin/#PermitRootLogin/g' /etc/ssh/sshd_config
+systemctl restart ssh
+
+sudo visudo
+#<USERNAME> ALL=(ALL) NOPASSWD: ALL
+
+# firewall
+sudo apt -y install ufw
+
+sudo ufw default deny incoming
+sudo ufw allow OpenSSH
+sudo ufw allow 80
+sudo ufw allow 443
+
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker rmi $(docker images -q)
+
+# docker reverse nginx proxy
+NGINX_DOMAIN=.dk
+docker run --detach --restart unless-stopped --name nginx-proxy --publish 80:80 --volume /var/run/docker.sock:/tmp/docker.sock:ro nginxproxy/nginx-proxy:1.4
+
+# upload
+docker run --detach --restart unless-stopped --expose 80 -e VIRTUAL_HOST=upload.${NGINX_DOMAIN} --name upload -v $HOME/tmp:/docroot mayth/simple-upload-server -document_root=/docroot -enable_auth=true -addr=0.0.0.0:80 /var/root
+docker logs upload # to obtain token
+
+# upload 
+curl -Ffile=@hosts.txt http://upload.${NGINX_DOMAIN}/upload?token=${TOKEN}
+
