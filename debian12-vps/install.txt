@@ -60,6 +60,9 @@ docker run --detach --restart unless-stopped --name nginx-proxy --publish 80:80 
 docker run --detach --restart unless-stopped --expose 80 -e VIRTUAL_HOST=upload.${NGINX_DOMAIN} --name upload -v $HOME/tmp:/docroot mayth/simple-upload-server -document_root=/docroot -enable_auth=true -addr=0.0.0.0:80 /var/root
 docker logs upload # to obtain token
 
+# resume server
+docker run --detach --restart unless-stopped --expose 80 -e VIRTUAL_HOST=resume.${NGINX_DOMAIN} --name resume-server ${USER}/resume-server
+
 # upload 
 curl -Ffile=@hosts.txt http://upload.${NGINX_DOMAIN}/upload?token=${TOKEN}
 
