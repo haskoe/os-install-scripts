@@ -1,6 +1,22 @@
-# py 3.12, vscode, rustdesk
+# install winget
+Install-Script -Name winget-install -RequiredVersion 3.2.6
+https://github.com/microsoft/winget-cli/releases
+
 winget install -e --id Python.Python.3.12
-winget install -e --id Microsoft.VisualStudioCode
 winget install --id=RustDesk.RustDesk  -e
+winget install --id=Google.Chrome  -e
+winget install -e --id Microsoft.VisualStudioCode
+winget install Microsoft.DotNet.SDK.6
+winget install -e --id Git.Git
+winget install -e --id TortoiseGit.TortoiseGit
 
+Enable-ComputerRestore -Drive "C:\"
+Get-ComputerRestorePoint
 
+wevtutil cl application
+wevtutil cl Security
+wevtutil cl System
+
+sfc /scannow
+DISM /Online /Cleanup-Image /ScanHealth
+Dism /Online /Cleanup-image /RestoreHealth
