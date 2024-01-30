@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+[[ ! -f $1 ]] && echo please specify file to upload
+
+curl -XPOST -Ffile=@$1 http://upload.haskoe.dk/upload?token=$(op read op://private/upload_token/password)

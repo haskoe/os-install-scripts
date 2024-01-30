@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+[[ "$#" -ne 1 ]] && echo "please specify file to download" && exit 1
+
+curl -O http://upload.haskoe.dk/files/$1?token=$(op read op://private/upload_token/password)
