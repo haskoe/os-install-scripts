@@ -47,6 +47,8 @@ sudo ufw default deny incoming
 sudo ufw allow OpenSSH
 sudo ufw allow 80
 sudo ufw allow 443
+sudo ufw allow 587
+sudo ufw enable
 
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)
