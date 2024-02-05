@@ -4,9 +4,15 @@ apt update && apt dist-upgrade
 
 # ssh root@bvm
 USERNAME=....
-adduser $USERNAME
-usermod -a -G sudo $USERNAME
-apt install -y sudo git emacs-nox
+adduser ${USERNAME}
+usermod -a -G sudo ${USERNAME}
+apt install -y sudo git emacs-nox make
+
+mkdir /home/${USERNAME}
+chown $USERNAME:$USERNAME /home/$USERNAME/{.,.ssh/,.ssh/authorized_keys}
+chmod u+rwX,go-rwX,-t /home/$USERNAME/{.ssh/,.ssh/authorized_keys}
+chmod go-w /home/$USERNAME/
+
 
 # passwordless sudo
 
