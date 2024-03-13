@@ -26,7 +26,7 @@ ANSLAG='0'
 if [ "$1" == "pdf" ]; then
     docker run --rm -v ${ROOT_DOC_PATH}:/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf ${DOCKER_DOC_FILE} -r asciidoctor-diagram -r asciidoctor-bibtex
 else
-    docker run --rm -v ${ROOT_DOC_PATH}:/documents/ asciidoctor/docker-asciidoctor asciidoctor ${DOCKER_DOC_FILE} -b docbook -a 'idprefix=' -a 'idseparator=-' -r asciidoctor-diagram # -r asciidoctor-bibtex 
+    docker run --rm -v ${ROOT_DOC_PATH}:/documents/ asciidoctor/docker-asciidoctor asciidoctor ${DOCKER_DOC_FILE} -b docbook -a 'idprefix=' -a 'idseparator=-' -r asciidoctor-diagram -r asciidoctor-bibtex 
     pandoc ${DOC_PATH}/${DOC_FILE_WO_EXT}.xml --toc --from docbook --to docx --output ${DOC_PATH}/${DOC_FILE_WO_EXT}.docx 
     rm -f ${DOC_PATH}/${DOC_FILE_WO_EXT}.xml
 fi

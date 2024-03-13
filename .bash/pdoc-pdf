@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+_pdoc-base pdf $1
