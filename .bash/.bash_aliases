@@ -1,4 +1,4 @@
-alias q="docker run --rm --volume $(pwd):/data jdutant/quarto-latex"
+alias q='docker run --rm --volume $(pwd):/data jdutant/quarto-latex'
 
 # put this in ~/.bashrc
 alias sshn='ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no'
