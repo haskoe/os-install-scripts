@@ -1,3 +1,5 @@
+alias q="docker run --rm --volume $(pwd):/data quarto-latex"
+
 # put this in ~/.bashrc
 alias sshn='ssh -o PreferredAuthentications=keyboard-interactive,password -o PubkeyAuthentication=no'
 #alias vs='. ~/dev/azure-repos/cs/tools/bat/start_vscode.sh'
