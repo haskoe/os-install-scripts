@@ -1,0 +1,20 @@
+#!/bin/bash -e
+
+[[ "$#" -ne 2 ]] && echo "syntax: pdoc-$1.sh <name of pandoc markdown file>" && exit 1
+
+#. _common.sh ${BASH_SOURCE[0]}
+
+DOC_PATH=$(dirname `realpath $2`)
+DOC_FILE=$(basename $2)
+DOC_FILE_WO_EXT=$(basename -s .pdoc $2)
+
+ROOT_DOC_PATH=$DOC_PATH
+DOC_REL_PATH=.
+DOCKER_DOC_FILE=${DOC_REL_PATH}/${DOC_FILE}
+
+ANSLAG='0'
+
+if [ "$1" == "pdf" ]; then
+    # pandoc --bibliography citations.json  --citeproc infile.md -o outfile.html
+    docker run --rm -v ${ROOT_DOC_PATH}:/data/ pandoc/extra -V toc-title:"Custom text" --toc --toc-depth=2 --bibliography ./references.bib --csl ./csl/vancouver.csl --citeproc ${DOCKER_DOC_FILE} -o ${DOCKER_DOC_FILE}.pdf
+fi
