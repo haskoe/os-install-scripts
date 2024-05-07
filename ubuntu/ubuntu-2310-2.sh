@@ -75,15 +75,17 @@ VM_NAME=${VM_TYPE}
 multipass delete $VM_NAME
 multipass purge
 multipass launch $VM_TYPE -c 2 -m 2G -d 20G -n $VM_NAME
-multipass exec $VM_NAME  -- bash -c "sudo apt update && sudo apt -y dist-upgrade && sudo apt install -y git freerdp2-x11 openconnect openvpn && mkdir -p ~/dev/haskoe && cd ~/dev/haskoe && git clone https://github.com/haskoe/install-scripts.git && sudo shutdown -h now"
+multipass exec $VM_NAME  -- bash -c "sudo apt update && sudo apt -y dist-upgrade && sudo apt install -y git freerdp2-x11 openconnect openvpn && mkdir -p ~/dev/haskoe && cd ~/dev/haskoe && git clone https://github.com/haskoe/os-install-scripts.git && sudo shutdown -h now"
 multipass start $VM_NAME
 [[ ! -d ~/multipass-share ]] && mkdir ~/multipass-share
 # dummy command to force start of VM
 multipass exec $VM_NAME  -- bash -c "ls"
-multipass mount ~/multipass-share $VM_NAME:/share
-cp /home/heas/.cargo/bin/rbw* ~/multipass-share
-multipass exec $VM_NAME  -- bash -c "sudo cp /share/rbw* /usr/local/bin"
-multipass shell $VM_NAME
+multipass exec $VM_NAME  -- bash -c "echo `cat ~/.ssh/id_${HOSTNAME}.pub` >> ~/.ssh/authorized_keys"
+
+# multipass mount ~/multipass-share $VM_NAME:/share
+# cp /home/heas/.cargo/bin/rbw* ~/multipass-share
+# multipass exec $VM_NAME  -- bash -c "sudo cp /share/rbw* /usr/local/bin"
+# multipass shell $VM_NAME
 
 
 ASDF_BRANCH=v0.13.1
