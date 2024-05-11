@@ -70,13 +70,14 @@ multipass set local.bridged-network=mpbr0
 sudo snap restart multipass
 sudo nft add chain ip filter FORWARD '{ policy accept; }'
 
-VM_TYPE=lunar
+VM_TYPE=mantic
 VM_NAME=${VM_TYPE}
 multipass delete $VM_NAME
 multipass purge
 multipass launch $VM_TYPE -c 2 -m 2G -d 20G -n $VM_NAME
 multipass exec $VM_NAME  -- bash -c "sudo apt update && sudo apt -y dist-upgrade && sudo apt install -y git freerdp2-x11 openconnect openvpn && mkdir -p ~/dev/haskoe && cd ~/dev/haskoe && git clone https://github.com/haskoe/os-install-scripts.git && sudo shutdown -h now"
 multipass start $VM_NAME
+multipass exec $VM_NAME  -- bash -c "echo `cat ~/.ssh/id_${HOSTNAME}.pub` >> ~/.ssh/authorized_keys"
 [[ ! -d ~/multipass-share ]] && mkdir ~/multipass-share
 # dummy command to force start of VM
 multipass exec $VM_NAME  -- bash -c "ls"
@@ -113,8 +114,8 @@ asdf global elixir ${ELIXIR_VER}
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc
 sudo apt -y update
-sudo apt install -y postgresql-15 postgresql-client-15 libpq-dev postgresql-15-postgis-3 postgresql-15-postgis-3-scripts 
-sudo apt install -y postgresql-server-dev-15 postgresql-plpython3-15 postgresql-15-pgtap
+sudo apt install -y postgresql-16 postgresql-client-16 libpq-dev postgresql-15-postgis-3 postgresql-15-postgis-3-scripts 
+sudo apt install -y postgresql-server-dev-16 postgresql-plpython3-16 postgresql-15-pgtap
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
 sudo -u postgres psql -c "ALTER USER postgres with encrypted password '<password>'" postgres
@@ -195,3 +196,6 @@ sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
 
 sudo apt update && sudo apt install 1password-cli
+
+#op account add --address my.1password.com --email 
+#eval $(op signin)
