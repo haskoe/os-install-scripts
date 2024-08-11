@@ -2,6 +2,7 @@
 
 # login to i3
 I3_CONFIG=~/.config/i3/config
+# hack: mkdir -p I3_CONFIG
 [[ ! -f "${I3_CONFIG}" ]] && echo Please login using i3 && exit 1
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
