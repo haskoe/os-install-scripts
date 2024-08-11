@@ -244,6 +244,5 @@ mix ecto.create && mix phx.server
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
-cargo install rbw
-#cargo install cargo-edit cargo-expand cargo-update bat ripgrep du-dust bottom exa fd-find sheldon dirstat-rs
+cargo install cargo-edit cargo-expand cargo-update bat ripgrep du-dust bottom exa fd-find dirstat-rs cargo install yazi-fm yazi-cli
 
