@@ -70,6 +70,7 @@ npm --version
 # bun 
 curl -fsSL https://bun.sh/install | bash
 
+# mainline
 sudo add-apt-repository -y ppa:cappelikan/ppa
 sudo apt -y update && sudo apt -y dist-upgrade
 sudo apt install -y mainline
@@ -101,17 +102,18 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
 cargo install cargo-edit cargo-expand cargo-update bat ripgrep du-dust bottom exa fd-find dirstat-rs cargo install yazi-fm yazi-cli
 
+# 1password
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
-
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list
-
 sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22
 curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
-
 sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
 curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-
 sudo apt update && sudo apt install 1password-cli
-
 op account add --address my.1password.com --email
+
+#
+wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VER}/gcm-linux_amd64.${GCM_VER}.deb
+sudo dpkg -i gcm-linux_amd64.${GCM_VER}.deb
+git-credential-manager configure

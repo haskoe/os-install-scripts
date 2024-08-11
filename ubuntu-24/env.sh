@@ -1,2 +1,3 @@
-GH_USER=haskoe
-GH_EMAIL=henrik@haskoe.dk
+GH_USER=
+GH_EMAIL=
+GCM_VER=2.5.1
