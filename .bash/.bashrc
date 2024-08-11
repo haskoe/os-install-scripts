@@ -7,6 +7,6 @@ BASH_ALIASES=$SCRIPTPATH/.bash_aliases
 
 . $BASH_ALIASES
 
-eval `keychain --eval --agents ssh id_${HOSTNAME}`
+eval `keychain --eval --agents ssh id_ed25519`
 
 PATH=$PATH:$SCRIPTPATH:/home/${USER}/proj/heas0404/cs/repos/tools/db/unix
