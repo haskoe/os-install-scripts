@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # login to i3
-I3_CONFIG=~/.config/i3/config
-# hack: mkdir -p I3_CONFIG
+I3_CONFIG_DIR=~/.config/i3
+I3_CONFIG=${I3_CONFIG}/config
+# hack: mkdir -p ${I3_CONFIG_DIR} && touch ${I3_CONFIG}
 [[ ! -f "${I3_CONFIG}" ]] && echo Please login using i3 && exit 1
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
@@ -16,16 +17,15 @@ git config --global user.name $GH_USER
 git config --global user.email $GH_EMAIL
 git config --global pull.rebase false
 
-${SCRIPT_DIR}/i3-config-include.conf
+I3_INCLUDE_FILE=${SCRIPT_DIR}/i3-config-include.conf
 [[ ! -f "${I3_INCLUDE_FILE}" ]] && echo missin include file && exit 1
 
-mkdir ~/.config/i3/config.d
-${SCRIPT_DIR}/i3-config-include.conf ~/.config/i3/config.d
+mkdir ${I3_CONFIG_DIR}/config.d
+cp ${SCRIPT_DIR}/i3-config-include.conf ${I3_CONFIG_DIR}/config.d
 
-tee -a ~/.config/i3/config <<-EOF
+tee -a ${I3_CONFIG} <<-EOF
 include ~/.config/i3/config.d/*.conf
 EOF
-
 sudo apt -y install git blueman bluez pulseaudio-module-bluetooth automake autoconf libncurses5-dev inotify-tools picom pkg-config keychain build-essential gddrescue smplayer pass gpg emacs-nox tmux powertop git gitk i3 i3status keychain autorandr curl curl apt-transport-https htop ca-certificates build-essential brightnessctl freerdp2-x11 openconnect libssl-dev libssh-dev thunderbird ranger python3-pip idle terminator pkg-config mc usb-creator-gtk fzf
 sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze libvirt-clients meld virt-manager flameshot p7zip lm-sensors evince exiftool mediainfo
 
