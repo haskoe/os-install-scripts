@@ -134,3 +134,12 @@ sudo systemctl restart postgresql.service
 sudo -u postgres createuser -s -d heas
 createdb heas
 psql
+
+# ssh hardened
+CONF_FILE=/etc/ssh/sshd_config.d/hardened.conf
+echo PermitRootLogin no | sudo tee $CONF_FILE
+echo PubkeyAuthentication yes | sudo tee -a $CONF_FILE
+echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE
+echo PasswordAuthentication no | sudo tee -a $CONF_FILE
+#sudo perl -pibak -e 's/^PermitRootLogin/#PermitRootLogin/g' /etc/ssh/sshd_config
+sudo systemctl restart ssh
