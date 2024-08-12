@@ -117,7 +117,20 @@ op account add --address my.1password.com --email
 #
 wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VER}/gcm-linux_amd64.${GCM_VER}.deb
 sudo dpkg -i gcm-linux_amd64.${GCM_VER}.deb
-git-credential-manager configure
+tee ~/.gitconfig <<-EOF
+[user]
+	name = ${GH_USER}
+	email = ${GH_EMAIL}
+[pull]
+	rebase = false
+[credential]
+	credentialStore = cache
+	helper = /usr/local/bin/git-credential-manager
+
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+EOF
+
 
 # postgres
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
