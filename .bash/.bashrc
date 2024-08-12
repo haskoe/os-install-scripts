@@ -9,4 +9,7 @@ BASH_ALIASES=$SCRIPTPATH/.bash_aliases
 
 eval `keychain --eval --agents ssh id_ed25519`
 
-PATH=$PATH:$SCRIPTPATH:/home/${USER}/proj/heas0404/cs/repos/tools/db/unix
+export PATH=$PATH:$HOME/.local/bin:$HOME/.local/bin:$SCRIPTPATH:/home/${USER}/proj/heas0404/cs/repos/tools/db/unix
+
+[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
+[ -f /usr/share/bash-completion/completions/fzf ] && source /usr/share/bash-completion/completions/fzf

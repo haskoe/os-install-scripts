@@ -27,7 +27,8 @@ tee -a ${I3_CONFIG} <<-EOF
 include ~/.config/i3/config.d/*.conf
 EOF
 sudo apt -y install git blueman bluez pulseaudio-module-bluetooth automake autoconf libncurses5-dev inotify-tools picom pkg-config keychain build-essential gddrescue smplayer pass gpg emacs-nox tmux powertop git gitk i3 i3status keychain autorandr curl curl apt-transport-https htop ca-certificates build-essential brightnessctl freerdp2-x11 openconnect libssl-dev libssh-dev thunderbird ranger python3-pip idle terminator pkg-config mc usb-creator-gtk fzf
-sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze libvirt-clients meld virt-manager flameshot p7zip lm-sensors evince exiftool mediainfo
+sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze libvirt-clients meld virt-manager flameshot p7zip lm-sensors evince exiftool mediainfo spice-client-gtk gparted
+
 
 ssh_fname=id_ed25519
 ssh-keygen -f ~/.ssh/${ssh_fname}
@@ -117,3 +118,19 @@ op account add --address my.1password.com --email
 wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VER}/gcm-linux_amd64.${GCM_VER}.deb
 sudo dpkg -i gcm-linux_amd64.${GCM_VER}.deb
 git-credential-manager configure
+
+# postgres
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc
+sudo apt -y update
+sudo apt install -y postgresql-${POSTGRES_VER} postgresql-client-${POSTGRES_VER} libpq-dev postgresql-15-postgis-3 postgresql-15-postgis-3-scripts 
+sudo apt install -y postgresql-server-dev-${POSTGRES_VER} postgresql-plpython3-${POSTGRES_VER} postgresql-15-pgtap
+sudo systemctl enable postgresql
+sudo systemctl start postgresql
+sudo -u postgres psql -c "ALTER USER postgres with encrypted password '${POSTGRES_PWD}'" postgres
+sudo perl -pibak -e 's/local.*all.*postgres.*peer/local all postgres md5/' /etc/postgresql/15/main/pg_hba.conf
+sudo perl -pibak -e 's/en_US/en_DK/g' /etc/postgresql/15/main/postgresql.conf 
+sudo systemctl restart postgresql.service
+sudo -u postgres createuser -s -d heas
+createdb heas
+psql
