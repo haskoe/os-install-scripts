@@ -156,3 +156,19 @@ echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE
 echo PasswordAuthentication no | sudo tee -a $CONF_FILE
 #sudo perl -pibak -e 's/^PermitRootLogin/#PermitRootLogin/g' /etc/ssh/sshd_config
 sudo systemctl restart ssh
+
+# asdf
+ASDF_BRANCH=v0.14.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf list all erlang
+asdf list all elixir
+ERLANG_VER=27.0.1
+asdf install erlang ${ERLANG_VER}
+asdf global erlang ${ERLANG_VER}
+ELIXIR_VER=1.17.2-otp-27
+asdf install elixir ${ELIXIR_VER}
+asdf global elixir ${ELIXIR_VER}
