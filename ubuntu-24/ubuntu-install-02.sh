@@ -28,6 +28,7 @@ include ~/.config/i3/config.d/*.conf
 EOF
 sudo apt -y install git blueman bluez pulseaudio-module-bluetooth automake autoconf libncurses5-dev inotify-tools picom pkg-config keychain build-essential gddrescue smplayer pass gpg emacs-nox tmux powertop git gitk i3 i3status keychain autorandr curl curl apt-transport-https htop ca-certificates build-essential brightnessctl freerdp2-x11 openconnect libssl-dev libssh-dev thunderbird ranger python3-pip idle terminator pkg-config mc usb-creator-gtk fzf
 sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze libvirt-clients meld virt-manager flameshot p7zip lm-sensors evince exiftool mediainfo spice-client-gtk gparted kpartx
+sudo apt -y install pinentry-tty
 
 # crash dump
 sudo apt -y linux-crashdump
@@ -118,7 +119,7 @@ curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --d
 sudo apt update && sudo apt install 1password-cli
 op account add --address my.1password.com --email
 
-#
+# git-credential-manager using gpg/pass
 wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VER}/gcm-linux_amd64.${GCM_VER}.deb
 sudo dpkg -i gcm-linux_amd64.${GCM_VER}.deb
 tee ~/.gitconfig <<-EOF
@@ -128,13 +129,18 @@ tee ~/.gitconfig <<-EOF
 [pull]
 	rebase = false
 [credential]
-	credentialStore = cache
+	credentialStore = gpg
 	helper = /usr/local/bin/git-credential-manager
 
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 EOF
 
+# gpg and pass
+sudo update-alternatives --config pinentry
+gpg --full-generate-key # use defaults and save output for later use
+pass init <key from gpg generate key>
+# first git operation will prompt  for login credentials and save them in pass store
 
 # postgres
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
