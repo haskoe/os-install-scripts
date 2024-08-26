@@ -28,7 +28,7 @@ include ~/.config/i3/config.d/*.conf
 EOF
 sudo apt -y install git blueman bluez pulseaudio-module-bluetooth automake autoconf libncurses5-dev inotify-tools picom pkg-config keychain build-essential gddrescue smplayer pass gpg emacs-nox tmux powertop git gitk i3 i3status keychain autorandr curl curl apt-transport-https htop ca-certificates build-essential brightnessctl freerdp2-x11 openconnect libssl-dev libssh-dev thunderbird ranger python3-pip idle terminator pkg-config mc usb-creator-gtk fzf
 sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze libvirt-clients meld virt-manager flameshot p7zip lm-sensors evince exiftool mediainfo spice-client-gtk gparted kpartx
-sudo apt -y install pinentry-tty
+sudo apt -y install pinentry-tty sqlite3
 
 # crash dump
 sudo apt -y linux-crashdump
@@ -174,11 +174,28 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 . "$HOME/.asdf/completions/asdf.bash"
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
+
 asdf list all erlang
-asdf list all elixir
 ERLANG_VER=27.0.1
 asdf install erlang ${ERLANG_VER}
 asdf global erlang ${ERLANG_VER}
+
+asdf list all elixir
 ELIXIR_VER=1.17.2-otp-27
 asdf install elixir ${ELIXIR_VER}
 asdf global elixir ${ELIXIR_VER}
+
+asdf list all golang
+GOLANG_VER=1.23.0
+asdf install golang ${GOLANG_VER}
+asdf global golang ${GOLANG_VER}
+
+asdf list all haskell
+HASKELL_VER=9.10.1
+asdf install haskell ${HASKELL_VER}
+asdf global haskell ${HASKELL_VER}
+
+
+
