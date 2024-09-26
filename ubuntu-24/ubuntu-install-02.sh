@@ -212,9 +212,28 @@ asdf global r ${R_VER}
 
 # r packages
 # magick deps.
-sudo apt install -y graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers libmagick++-dev
+sudo apt install -y graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers 
+sudo apt install -y libmagick++-dev
 # pdftools deps.
 sudo apt install -y libpoppler-cpp-dev libpoppler-glib-dev
+
+# phantomjs
+PHANTOM_VERSION="phantomjs-2.1.1"
+ARCH=$(uname -m)
+PHANTOM_JS="$PHANTOM_VERSION-linux-$ARCH"
+
+sudo apt-get update
+sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y
+sudo apt-get install libfreetype6 libfreetype6-dev -y
+sudo apt-get install libfontconfig1 libfontconfig1-dev -y
+
+cd ~
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+sudo tar xvjf $PHANTOM_JS.tar.bz2
+
+sudo mv $PHANTOM_JS /usr/local/share
+sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+
 Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookdown", repos="https://cloud.r-project.org")'
@@ -227,7 +246,7 @@ Rscript -e 'install.packages("rticles", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("magick", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("pdftools", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("gifski", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
 
 
 # rstudio
@@ -235,3 +254,19 @@ RSTUDIO_DEB=rstudio-2024.09.0-375-amd64.deb
 wget https://download1.rstudio.org/electron/jammy/amd64/${RSTUDIO_DEB}
 sudo gdebi ${RSTUDIO_DEB}
 
+# phantomjs
+PHANTOM_VERSION="phantomjs-2.1.1"
+ARCH=$(uname -m)
+PHANTOM_JS="$PHANTOM_VERSION-linux-$ARCH"
+
+sudo apt-get update
+sudo apt-get install build-essential chrpath libssl-dev libxft-dev -y
+sudo apt-get install libfreetype6 libfreetype6-dev -y
+sudo apt-get install libfontconfig1 libfontconfig1-dev -y
+
+cd ~
+wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
+sudo tar xvjf $PHANTOM_JS.tar.bz2
+
+sudo mv $PHANTOM_JS /usr/local/share
+sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
