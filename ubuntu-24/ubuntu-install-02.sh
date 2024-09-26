@@ -217,6 +217,9 @@ sudo apt install -y libmagick++-dev
 # pdftools deps.
 sudo apt install -y libpoppler-cpp-dev libpoppler-glib-dev
 
+# tidyverse
+sudo apt install libharfbuzz-dev libfribidi-dev
+
 # phantomjs
 PHANTOM_VERSION="phantomjs-2.1.1"
 ARCH=$(uname -m)
@@ -247,6 +250,8 @@ Rscript -e 'install.packages("magick", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("pdftools", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("gifski", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
 
 
 # rstudio
