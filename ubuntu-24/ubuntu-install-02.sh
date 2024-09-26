@@ -172,30 +172,58 @@ ASDF_BRANCH=v0.14.0
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
-asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
-asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
-asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf list all erlang
 ERLANG_VER=27.0.1
 asdf install erlang ${ERLANG_VER}
 asdf global erlang ${ERLANG_VER}
 
+asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 asdf list all elixir
 ELIXIR_VER=1.17.2-otp-27
 asdf install elixir ${ELIXIR_VER}
 asdf global elixir ${ELIXIR_VER}
 
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf list all golang
 GOLANG_VER=1.23.0
 asdf install golang ${GOLANG_VER}
 asdf global golang ${GOLANG_VER}
 
+asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 asdf list all haskell
 HASKELL_VER=9.10.1
 asdf install haskell ${HASKELL_VER}
 asdf global haskell ${HASKELL_VER}
 
+asdf plugin-add r https://github.com/asdf-community/asdf-r.git
+sudo apt-get install -y build-essential libcurl3-dev libreadline-dev gfortran 
+sudo apt-get install -y liblzma-dev liblzma5 libbz2-1.0 libbz2-dev
+sudo apt-get install -y xorg-dev libbz2-dev liblzma-dev libpcre2-dev
+asdf list all r
+R_VER=4.4.1
+R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' asdf install r
+asdf global r ${R_VER}
 
+# r packages
+# magick deps.
+sudo apt install -y graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers
+sudo apt-get install libmagick++-dev
+Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("bookmarkdown", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("bookdown", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("webshot", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages(blogdown", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("blogdown", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("tinytex", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("shiny", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("rticles", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("magick", repos="https://cloud.r-project.org")'
+
+
+# rstudio
+RSTUDIO_DEB=rstudio-2024.09.0-375-amd64.deb
+wget https://download1.rstudio.org/electron/jammy/amd64/${RSTUDIO_DEB}
+sudo gdebi ${RSTUDIO_DEB}
 
