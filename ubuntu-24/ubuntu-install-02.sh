@@ -167,6 +167,10 @@ echo PasswordAuthentication no | sudo tee -a $CONF_FILE
 #sudo perl -pibak -e 's/^PermitRootLogin/#PermitRootLogin/g' /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
+# tex
+sudo apt install -y texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-xetex texlive-latex-recommended texlive-science texlive-font-utils texlive-bibtex-extra texlive-humanities texlive-publishers texlive-lang-french texlive-latex-extra biber
+
+
 # asdf
 ASDF_BRANCH=v0.14.0
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
@@ -208,8 +212,9 @@ asdf global r ${R_VER}
 
 # r packages
 # magick deps.
-sudo apt install -y graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers
-sudo apt-get install libmagick++-dev
+sudo apt install -y graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers graphicsmagick-libmagick-dev-compat libgraphicsmagick++1-dev libmagick++-6-headers libmagick++-dev
+# pdftools deps.
+sudo apt install -y libpoppler-cpp-dev libpoppler-glib-dev
 Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookdown", repos="https://cloud.r-project.org")'
@@ -220,6 +225,9 @@ Rscript -e 'install.packages("tinytex", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("shiny", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("rticles", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("magick", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("pdftools", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("gifski", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("", repos="https://cloud.r-project.org")'
 
 
 # rstudio
