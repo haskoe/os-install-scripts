@@ -252,6 +252,7 @@ Rscript -e 'install.packages("gifski", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("formatR", repos="https://cloud.r-project.org")'
 
 
 # rstudio
