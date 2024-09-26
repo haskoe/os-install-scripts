@@ -19,8 +19,8 @@ git config --global user.email $GH_EMAIL
 git config --global pull.rebase false
 
 #hostname=`hostname`
-ssh_fname=id_${HOSTNAME}
-ssh-keygen -f ~/.ssh/${ssh_fname}
+ssh_fname=id_ed25519
+ssh-keygen
 
 sudo snap install chromium
 sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /snap/bin/chromium 210
@@ -71,7 +71,7 @@ multipass set local.bridged-network=mpbr0
 sudo snap restart multipass
 sudo nft add chain ip filter FORWARD '{ policy accept; }'
 
-VM_TYPE=mantic
+VM_TYPE=noble
 VM_NAME=${VM_TYPE}
 multipass delete $VM_NAME
 multipass purge
@@ -79,6 +79,7 @@ multipass launch $VM_TYPE -c 2 -m 2G -d 20G -n $VM_NAME
 multipass exec $VM_NAME  -- bash -c "sudo apt update && sudo apt -y dist-upgrade && sudo apt install -y git freerdp2-x11 openconnect openvpn && mkdir -p ~/dev/haskoe && cd ~/dev/haskoe && git clone https://github.com/haskoe/os-install-scripts.git && sudo shutdown -h now"
 multipass start $VM_NAME
 multipass exec $VM_NAME  -- bash -c "echo `cat ~/.ssh/id_${HOSTNAME}.pub` >> ~/.ssh/authorized_keys"
+cat ~/.ssh/id_${HOSTNAME}.pub | multipass exec $VM_NAME -- tee -a .ssh/authorized_keys
 [[ ! -d ~/multipass-share ]] && mkdir ~/multipass-share
 # dummy command to force start of VM
 multipass exec $VM_NAME  -- bash -c "ls"
@@ -90,7 +91,7 @@ multipass exec $VM_NAME  -- bash -c "echo `cat ~/.ssh/id_${HOSTNAME}.pub` >> ~/.
 # multipass shell $VM_NAME
 
 
-ASDF_BRANCH=v0.13.1
+ASDF_BRANCH=v0.14.0
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 tee -a ~/.bashrc <<-EOF
 . "$HOME/.asdf/asdf.sh"
@@ -102,12 +103,12 @@ asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 
 asdf list all erlang
-ERLANG_VER=26.1.2
+ERLANG_VER=27.0.1
 asdf install erlang ${ERLANG_VER}
 asdf global erlang ${ERLANG_VER}
 
 asdf list all elixir
-ELIXIR_VER=1.15.7-otp-26
+ELIXIR_VER=1.17.2-otp-27
 asdf install elixir ${ELIXIR_VER}
 asdf global elixir ${ELIXIR_VER}
 
