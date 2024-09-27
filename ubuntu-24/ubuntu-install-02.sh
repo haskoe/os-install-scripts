@@ -252,7 +252,8 @@ Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("formatR", repos="https://cloud.r-project.org")'
-
+Rscript -e 'install.packages("xlsx", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("pivottabler", repos="https://cloud.r-project.org")'
 
 # rstudio
 RSTUDIO_DEB=rstudio-2024.09.0-375-amd64.deb
