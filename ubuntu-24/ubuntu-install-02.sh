@@ -252,7 +252,10 @@ Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("formatR", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("xlsx", repos="https://cloud.r-project.org")'
+
+# sudo apt install -y default-jre default-jdk r-cran-rjava
+# sudo R CMD javareconf
+# Rscript -e 'install.packages("xlsx", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("pivottabler", repos="https://cloud.r-project.org")'
 
 # rstudio
