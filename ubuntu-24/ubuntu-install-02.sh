@@ -202,6 +202,14 @@ LANG_VER=3.12.7
 asdf install $PROG_LANG ${LANG_VER}
 asdf global $PROG_LANG ${LANG_VER}
 
+# pipenv
+pip install pipenv
+# example usage
+cd ~/dev/my-python-project
+pipenv --python 3.12.7
+pip install pandas matplotlib scipy numpy jupyterlab polars pint
+# env. can now be selected in vscode using Python: Select Interpreter
+
 asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 asdf list all haskell
 HASKELL_VER=9.10.1
