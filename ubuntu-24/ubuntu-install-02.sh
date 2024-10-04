@@ -236,6 +236,9 @@ sudo tar xvjf $PHANTOM_JS.tar.bz2
 
 sudo mv $PHANTOM_JS /usr/local/share
 sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
+Rscript -e 'install.packages("radian", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("httpgd", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("languageserver", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookmarkdown", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("bookdown", repos="https://cloud.r-project.org")'
