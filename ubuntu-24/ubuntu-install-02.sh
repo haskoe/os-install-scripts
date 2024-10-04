@@ -195,6 +195,13 @@ GOLANG_VER=1.23.0
 asdf install golang ${GOLANG_VER}
 asdf global golang ${GOLANG_VER}
 
+PROG_LANG==python
+asdf plugin add $PROG_LANG
+asdf list all $PROG_LANG
+LANG_VER=3.12.7
+asdf install $PROG_LANG ${LANG_VER}
+asdf global $PROG_LANG ${LANG_VER}
+
 asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 asdf list all haskell
 HASKELL_VER=9.10.1
