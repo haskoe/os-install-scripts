@@ -274,10 +274,18 @@ Rscript -e 'install.packages("stargazer", repos="https://cloud.r-project.org")'
 
 # knitr command line, repo: https://github.com/sachsmc/knit-git-markr-guide
 Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
-# stargazer pdf issue. Try:
-#output:
-#  pdf_document:
-#    keep_tex: true
+# TOC and stargazer pdf issue. Try:
+#   pdf_document:
+#     keep_tex: true
+#     toc: true
+#     toc_depth: 2
+#
+# ```{r star, results = 'asis', warning=FALSE, message=FALSE, verbatim = TRUE}
+# library(stargazer, quietly = TRUE)
+# fit1 <- lm(mpg ~ wt, mtcars)
+# fit2 <- lm(mpg ~ wt + hp, mtcars)
+# fit3 <- lm(mpg ~ wt + hp + disp, mtcars)
+# stargazer(fit1, fit2, fit3, type = 'latex', header=FALSE)
 
 # sudo apt install -y default-jre default-jdk r-cran-rjava
 # sudo R CMD javareconf
