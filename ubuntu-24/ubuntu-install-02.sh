@@ -269,6 +269,11 @@ Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
 Rscript -e 'install.packages("formatR", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("Cairo", repos="https://cloud.r-project.org")'
+Rscript -e 'install.packages("stargazer", repos="https://cloud.r-project.org")'
+
+# knitr command line, repo: https://github.com/sachsmc/knit-git-markr-guide
+Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
 
 # sudo apt install -y default-jre default-jdk r-cran-rjava
 # sudo R CMD javareconf
