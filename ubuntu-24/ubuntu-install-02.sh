@@ -274,6 +274,10 @@ Rscript -e 'install.packages("stargazer", repos="https://cloud.r-project.org")'
 
 # knitr command line, repo: https://github.com/sachsmc/knit-git-markr-guide
 Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
+# stargazer pdf issue. Try:
+#output:
+#  pdf_document:
+#    keep_tex: true
 
 # sudo apt install -y default-jre default-jdk r-cran-rjava
 # sudo R CMD javareconf
