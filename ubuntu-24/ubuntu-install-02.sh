@@ -253,6 +253,7 @@ sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
 
 sudo apt install libgsl-dev
 
+set +H
 declare -a R_PKGS=(
 "BiocStyle"
 "BiocGenerics"
@@ -319,7 +320,7 @@ declare -a R_PKGS=(
 )
 for R_PKG in "${R_PKGS[@]}"
 do
-  Rscript -e "install.packages('${R_PKG}', repos='https://cloud.r-project.org')"
+  Rscript -e "if (!require('${R_PKG}')) install.packages('${R_PKG}', repos='https://cloud.r-project.org')"
 done
 
 # knitr command line, repo: https://github.com/sachsmc/knit-git-markr-guide
@@ -345,3 +346,7 @@ Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
 RSTUDIO_DEB=rstudio-2024.09.0-375-amd64.deb
 wget https://download1.rstudio.org/electron/jammy/amd64/${RSTUDIO_DEB}
 sudo gdebi ${RSTUDIO_DEB}
+
+QUARTO_VER="1.5.57"
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER}/quarto-v${QUARTO_VER}-linux-amd64.deb
+sudo gdebi ~/Downloads/quarto-v${QUARTO_VER}-linux-amd64.deb
