@@ -248,29 +248,79 @@ sudo apt-get install libfontconfig1 libfontconfig1-dev -y
 cd ~
 wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2
 sudo tar xvjf $PHANTOM_JS.tar.bz2
-
 sudo mv $PHANTOM_JS /usr/local/share
 sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
-Rscript -e 'install.packages("radian", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("httpgd", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("languageserver", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("bookmarkdown", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("bookdown", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("webshot", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("blogdown", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("tinytex", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("shiny", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("rticles", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("magick", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("pdftools", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("gifski", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("reticulate", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("stevedata", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("tidyverse", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("formatR", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("Cairo", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("stargazer", repos="https://cloud.r-project.org")'
+
+sudo apt install libgsl-dev
+
+declare -a R_PKGS=(
+"BiocStyle"
+"BiocGenerics"
+"blogdown"
+"bookdown"
+"bookmarkdown"
+"Cairo"
+"devtools"
+"downlit"
+"dplyr"
+"forcats"
+"formatR"
+"ggforce"
+"ggplot2"
+"ggraph"
+"ggridges"
+"ggthemes"
+"gifski"
+"gutenbergr"
+"httpgd"
+"igraph"
+"janeaustenr"
+"janitor"
+"jsonlite"
+"knitractive"
+"Lahman"
+"languageserver"
+"lobstr"
+"lubridate"
+"magick"
+"mallet"
+"Matrix"
+"mindr"
+"NutrienTrackeR"
+"nycflights13"
+"palmerpenguins"
+"pdftools"
+"pivottabler"
+"quanteda"
+"radian"
+"readr"
+"reshape2"
+"reticulate"
+"rmarkdown"
+"rticles"
+"scater"
+"sessioninfo"
+"shiny"
+"stargazer"
+"stevedata"
+"stringr"
+"styler"
+"textdata"
+"tidyr"
+"tidytext"
+"tidyverse"
+"tinytex"
+"tm"
+"topicmodels"
+"webshot"
+"widyr"
+"wordcloud"
+"XML"
+)
+for R_PKG in "${R_PKGS[@]}"
+do
+  Rscript -e "install.packages('${R_PKG}', repos='https://cloud.r-project.org')"
+done
 
 # knitr command line, repo: https://github.com/sachsmc/knit-git-markr-guide
 Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
@@ -289,8 +339,7 @@ Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
 
 # sudo apt install -y default-jre default-jdk r-cran-rjava
 # sudo R CMD javareconf
-# Rscript -e 'install.packages("xlsx", repos="https://cloud.r-project.org")'
-Rscript -e 'install.packages("pivottabler", repos="https://cloud.r-project.org")'
+# "xlsx"
 
 # rstudio
 RSTUDIO_DEB=rstudio-2024.09.0-375-amd64.deb
