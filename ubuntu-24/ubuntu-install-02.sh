@@ -251,7 +251,7 @@ sudo tar xvjf $PHANTOM_JS.tar.bz2
 sudo mv $PHANTOM_JS /usr/local/share
 sudo ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
 
-sudo apt install libgsl-dev
+sudo apt install libgsl-dev libgdal-dev
 
 set +H
 declare -a R_PKGS=(
@@ -286,6 +286,7 @@ declare -a R_PKGS=(
 "knitractive"
 "Lahman"
 "languageserver"
+"leaflet"
 "lobstr"
 "lubridate"
 "magick"
@@ -302,7 +303,9 @@ declare -a R_PKGS=(
 "plotrix"
 "quanteda"
 "radian"
+"raster"
 "readr"
+"repurrrsive"
 "reshape2"
 "reticulate"
 "rmarkdown"
@@ -315,6 +318,7 @@ declare -a R_PKGS=(
 "stringr"
 "styler"
 "textdata"
+"terra"
 "tidymodels"
 "tidyr"
 "tidytext"
