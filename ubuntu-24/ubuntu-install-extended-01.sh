@@ -12,5 +12,5 @@ sudo apt install -y libpoppler-cpp-dev libpoppler-glib-dev
 # tidyverse
 sudo apt install libharfbuzz-dev libfribidi-dev
 
-wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER}/quarto-v${QUARTO_VER}-linux-amd64.deb
-sudo gdebi quarto-v${QUARTO_VER}-linux-amd64.deb
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VER}/quarto-${QUARTO_VER}-linux-amd64.deb
+sudo gdebi quarto-${QUARTO_VER}-linux-amd64.deb

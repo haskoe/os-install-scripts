@@ -10,7 +10,7 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 [[ -z "${POSTGRES_VER}" ]] && echo "Github e-mail must be set" && exit 1
 [[ -z "${ASDF_VER}" ]] && echo "Github e-mail must be set" && exit 1
 
-sudo apt -y install git automake autoconf libncurses5-dev inotify-tools pkg-config keychain build-essential ddrescue mplayer 
+sudo apt -y install gdebi-core git automake autoconf libncurses5-dev inotify-tools pkg-config keychain build-essential ddrescue mplayer 
 sudo apt -y install pass gpg emacs-nox tmux powertop gitk curl apt-transport-https htop ca-certificates openconnect 
 sudo apt -y install libssl-dev libssh-dev ranger python3-pip terminator mc fzf gddrescue 
 sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze 
