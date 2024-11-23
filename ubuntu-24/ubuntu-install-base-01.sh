@@ -18,6 +18,8 @@ sudo apt -y install libvirt-clients virt-manager p7zip exiftool mediainfo pinent
 sudo apt -y install chrpath libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
 sudo apt -y install libgsl-dev libgdal-dev
 
+sudo apt-get install -y libreadline-dev gfortran liblzma-dev liblzma5 libbz2-1.0 libbz2-dev libpcre2-dev
+
 git config --global user.name $GH_USER
 git config --global user.email $GH_EMAIL
 git config --global pull.rebase false
