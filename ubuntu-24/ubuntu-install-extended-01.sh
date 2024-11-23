@@ -1,5 +1,10 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+[[ ! -f "${SCRIPT_DIR}/env.sh" ]] && echo missing env file && exit 1
+
+. ${SCRIPT_DIR}/env.sh
+
 sudo apt -y install blueman bluez pulseaudio-module-bluetooth picom smplayer i3 i3status 
 sudo apt -y install autorandr brightnessctl freerdp2-x11 thunderbird usb-creator-gtk
 sudo apt -y install meld flameshot lm-sensors evince spice-client-gtk gparted kpartx xorg-dev

@@ -22,6 +22,12 @@ source ~/.cargo/env
 cargo install cargo-edit cargo-expand cargo-update bat ripgrep du-dust bottom exa fd-find dirstat-rs 
 #cargo install yazi-fm yazi-cli
 
+sudo apt-add-repository ppa:flexiondotorg/quickemu
+sudo apt update
+sudo apt install quickemu
+#quickget windows 11
+#quickemu --vm windows-11.conf
+
 # tex
 sudo apt install -y texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-xetex 
 sudo apt install -y texlive-latex-recommended texlive-science texlive-font-utils texlive-bibtex-extra 

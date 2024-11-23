@@ -1,5 +1,10 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+[[ ! -f "${SCRIPT_DIR}/env.sh" ]] && echo missing env file && exit 1
+
+. ${SCRIPT_DIR}/env.sh
+
 asdf install haskell ${HASKELL_VER}
 asdf global haskell ${HASKELL_VER}
 
@@ -16,7 +21,7 @@ asdf global golang ${GOLANG_VER}
 asdf install python ${LANG_VER}
 asdf global python ${LANG_VER}
 
-R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' asdf install r
+R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' asdf install r ${R_VER}
 asdf global r ${R_VER}
 
 # pipenv
