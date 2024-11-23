@@ -36,8 +36,8 @@ sudo -u postgres psql -c "ALTER USER postgres with encrypted password '${POSTGRE
 sudo perl -pibak -e 's/local.*all.*postgres.*peer/local all postgres md5/' /etc/postgresql/${POSTGRES_VER}/main/pg_hba.conf
 sudo perl -pibak -e 's/en_US/en_DK/g' /etc/postgresql/${POSTGRES_VER}/main/postgresql.conf 
 sudo systemctl restart postgresql.service
-sudo -u postgres createuser -s -d heas
-createdb heas
+sudo -u postgres createuser -s -d ${USER}
+createdb ${USER}
 psql
 
 # ssh hardened
