@@ -104,6 +104,8 @@ psql
 
 # ssh hardened
 CONF_FILE=/etc/ssh/sshd_config.d/hardened.conf
+sudo rm $CONF_FILE
+sudo systemctl restart ssh
 echo PermitRootLogin no | sudo tee $CONF_FILE
 echo PubkeyAuthentication yes | sudo tee -a $CONF_FILE
 echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE

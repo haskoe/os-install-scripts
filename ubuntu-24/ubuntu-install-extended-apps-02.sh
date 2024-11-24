@@ -8,7 +8,6 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 asdf install haskell ${HASKELL_VER}
 asdf global haskell ${HASKELL_VER}
 
-ERLANG_VER=27.0.1
 asdf install erlang ${ERLANG_VER}
 asdf global erlang ${ERLANG_VER}
 
@@ -18,11 +17,15 @@ asdf global elixir ${ELIXIR_VER}
 asdf install golang ${GOLANG_VER}
 asdf global golang ${GOLANG_VER}
 
-asdf install python ${LANG_VER}
-asdf global python ${LANG_VER}
+asdf install python ${PYTHON_VER}
+asdf global python ${PYTHON_VER}
 
 R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo' asdf install r ${R_VER}
 asdf global r ${R_VER}
+
+# rstudio
+wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-${RSTUDIO_DEB}-${RSTUDIO_ARCH}.deb
+sudo gdebi rstudio-${RSTUDIO_DEB}-${RSTUDIO_ARCH}.deb
 
 # pipenv
 #pip install pipenv
@@ -139,6 +142,3 @@ Rscript -e "rmarkdown::render('brb-talk.Rmd','pdf_document')"
 # sudo R CMD javareconf
 # "xlsx"
 
-# rstudio
-wget https://download1.rstudio.org/electron/jammy/amd64/${RSTUDIO_DEB}
-sudo gdebi ${RSTUDIO_DEB}

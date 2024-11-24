@@ -22,9 +22,9 @@ source ~/.cargo/env
 cargo install cargo-edit cargo-expand cargo-update bat ripgrep du-dust bottom exa fd-find dirstat-rs 
 #cargo install yazi-fm yazi-cli
 
-sudo apt-add-repository ppa:flexiondotorg/quickemu
-sudo apt update
-sudo apt install quickemu
+sudo apt-add-repository -y ppa:flexiondotorg/quickemu
+sudo apt -y update
+sudo apt install -y quickemu
 #quickget windows 11
 #quickemu --vm windows-11.conf
 
@@ -46,3 +46,8 @@ asdf list all golang
 asdf list all python
 asdf list all haskell
 asdf list all r
+
+# mainline
+sudo add-apt-repository -y ppa:cappelikan/ppa
+sudo apt -y update && sudo apt -y dist-upgrade
+sudo apt install -y mainline
