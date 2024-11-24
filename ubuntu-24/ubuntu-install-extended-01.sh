@@ -34,5 +34,5 @@ Signed-By: /etc/apt/keyrings/zabbly.asc
 
 EOF'
 
-sudo apt -y update
-sudo apt install -y linux-zabbly
+#sudo apt -y update
+#sudo apt install -y linux-zabbly
