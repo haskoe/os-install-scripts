@@ -15,7 +15,10 @@ echo PGRST_DB_SCHEMA=pub>>${ENV_FILE}
 echo PGRST_DB_ANON_ROLE=${DBANON}>>${ENV_FILE}
 
 #pg-stop.sh ${PGDATABASE}
-[[ $(docker ps --format '{{.Names}}' -f status=running -f name=postgrest | grep -w postgrest) ]] && docker stop postgrest
-[[ $(docker ps --format '{{.Names}}' -f status=exited -f name=postgrest | grep -w postgrest) ]] && docker rm postgrest
 
+set +e
+[[ $(docker ps --format '{{.Names}}' -f status=running -f name=postgrest | grep -w postgrest) ]] && echo stop && docker stop postgrest
+read -t 0.01 >/dev/null
+[[ $(docker ps --format '{{.Names}}' -f status=exited -f name=postgrest | grep -w postgrest) ]] && echo rm && docker rm postgrest
+read -t 0.01 >/dev/null
 docker run --rm -d --net=host --name postgrest --env-file ${ENV_FILE} postgrest/postgrest
