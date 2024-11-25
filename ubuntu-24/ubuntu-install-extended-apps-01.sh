@@ -39,6 +39,8 @@ asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf plugin add python
 asdf plugin-add haskell https://github.com/vic/asdf-haskell.git
 asdf plugin-add r https://github.com/asdf-community/asdf-r.git
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin add pnpm
 
 asdf list all erlang
 asdf list all elixir

@@ -16,7 +16,7 @@ sudo apt -y install libssl-dev libssh-dev ranger python3-pip terminator mc fzf g
 sudo apt -y install docx2txt libarchive-tools unrar lynx elinks odt2txt wv antiword catdoc pandoc unrtf djvulibre-bin ccze 
 sudo apt -y install libvirt-clients virt-manager p7zip exiftool mediainfo pinentry-tty sqlite3
 sudo apt -y install chrpath libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev
-sudo apt -y install libgsl-dev libgdal-dev
+sudo apt -y install libgsl-dev libgdal-dev geeqie
 
 sudo apt-get install -y libreadline-dev gfortran liblzma-dev liblzma5 libbz2-1.0 libbz2-dev libpcre2-dev
 
@@ -87,6 +87,9 @@ tee ~/.gitconfig <<-EOF
 EOF
 
 # postgres
+sudo systemctl disable postgresql
+sudo systemctl stop postgresql
+
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc
 sudo apt -y update
@@ -117,3 +120,10 @@ ASDF_BRANCH=v${ASDF_VER}
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${ASDF_BRANCH}
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
+
+# uninstall cups
+sudo snap stop cups && sudo snap disable cups && sudo snap remove cups
+
+# useful commands
+# systemd-analyze blame
+# sudo apt autoremove --purge
