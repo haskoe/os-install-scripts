@@ -1,0 +1,128 @@
+{
+    "additional-repositories": [],
+    "archinstall-language": "English",
+    "audio_config": {
+        "audio": "pipewire"
+    },
+    "bootloader": "Systemd-boot",
+    "config_version": "3.0.2",
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/sda",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "boot",
+                            "esp"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "8b8059cb-45fa-4cd4-b84c-aa3b403853b0",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "GiB",
+                            "value": 1
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "ext4",
+                        "mount_options": [],
+                        "mountpoint": "/",
+                        "obj_id": "a1cc3a6b-c9c0-4412-8914-2a2ea241df15",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 511035047936
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 1074790400
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "disk_encryption": {
+        "encryption_type": "luks",
+        "lvm_volumes": [],
+        "partitions": [
+            "a1cc3a6b-c9c0-4412-8914-2a2ea241df15"
+        ]
+    },
+    "hostname": "x400",
+    "kernels": [
+        "linux"
+    ],
+    "locale_config": {
+        "kb_layout": "dk",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US"
+    },
+    "mirror_config": {
+        "custom_mirrors": [],
+        "mirror_regions": {
+            "Denmark": [
+                "http://mirrors.dotsrc.org/archlinux/$repo/os/$arch",
+                "https://mirrors.dotsrc.org/archlinux/$repo/os/$arch",
+                "http://mirror.group.one/archlinux/$repo/os/$arch",
+                "https://mirror.group.one/archlinux/$repo/os/$arch"
+            ]
+        }
+    },
+    "network_config": {
+        "type": "iso"
+    },
+    "ntp": true,
+    "packages": [],
+    "parallel downloads": 0,
+    "profile_config": {
+        "gfx_driver": "All open-source",
+        "greeter": "lightdm-gtk-greeter",
+        "profile": {
+            "custom_settings": {
+                "i3-wm": {}
+            },
+            "details": [
+                "i3-wm"
+            ],
+            "main": "Desktop"
+        }
+    },
+    "save_config": null,
+    "swap": true,
+    "timezone": "Europe/Copenhagen",
+    "uki": false,
+    "version": "3.0.2"
+}
