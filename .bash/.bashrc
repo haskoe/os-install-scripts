@@ -13,7 +13,7 @@ eval `keychain --eval --agents ssh id_ed25519`
 # . "/home/heas/.asdf/completions/asdf.bash"
 
 # bun                                                                                                                                                        
-" export BUN_INSTALL="$HOME/.bun"
+# export BUN_INSTALL="$HOME/.bun"
 
 #echo $PATH
 #export PATH=$BUN_INSTALL/bin:$HOME/.asdf/shims:$HOME/.local/bin:$SCRIPTPATH:$HOME/proj/heas0404/cs/repos/tools/db/unix:$PATH

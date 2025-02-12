@@ -106,3 +106,7 @@ eval "$(fzf --bash)"
 EOF
 
 yay -S powershell-bin
+
+ssh_fname=id_ed25519
+ssh-keygen -f ~/.ssh/${ssh_fname}
+# ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host
