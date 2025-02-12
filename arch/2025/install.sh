@@ -1,4 +1,4 @@
-sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar
+sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd
 sudo systemctl start sshd && sudo systemctl enable sshd
 
 # yay
@@ -48,6 +48,7 @@ git clone https://github.com/haskoe/os-install-scripts.git
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. "$HOME/.cargo/env"
 # cargo-binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 cargo-binstall bat bottom dirstat-rs du-dust exa fd-find ripgrep
@@ -82,9 +83,19 @@ yay -S ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx 
 # Mod1 -> Mod4
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 I3_CONFIG_DIR=~/.config/i3
+I3_CONFIG=${I3_CONFIG_DIR}/config
+perl -pi.bak -e 's/^bindsym..mod.Return/#bindsym $mod+Return/g' $I3_CONFIG
+
 mkdir ${I3_CONFIG_DIR}/config.d
 cp ${SCRIPT_DIR}/i3-config-include.conf ${I3_CONFIG_DIR}/config.d
 
 tee -a ${I3_CONFIG} <<-EOF
 include ~/.config/i3/config.d/*.conf
+EOF
+
+tee -a ~/.bashrc <<-EOF
+. "$HOME/.cargo/env"
+
+/usr/share/fzf/key-bindings.bash
+/usr/share/fzf/completion.bash[user]
 EOF
