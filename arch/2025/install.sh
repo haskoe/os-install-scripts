@@ -1,4 +1,4 @@
-sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip
+sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools
 sudo systemctl start sshd && sudo systemctl enable sshd
 
 # yay
@@ -71,7 +71,8 @@ yay -S ffmpeg
 # av1 example
 # for file in ./*.mp4; do ffmpeg -i $file -c:v libsvtav1 -crf 30 ~/drtv/mkv/$file; done
 
-# qemu quickemu choose full package
+# qemu 
+yay -S quickemu # choose full package
 # example: quickemu --vm ~/quickemu/windows-11.conf --display spice
 
 # ranger 
@@ -141,3 +142,8 @@ export SOPS_AGE_KEY_FILE=~/.config/mise/age.txt
 ssh_fname=id_ed25519
 ssh-keygen -f ~/.ssh/${ssh_fname}
 # ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host
+
+# phoenix
+mix archive.install hex phx_new
+mix ecto.create
+mix phx.server
