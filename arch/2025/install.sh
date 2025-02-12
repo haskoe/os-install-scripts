@@ -1,4 +1,4 @@
-sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd
+sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip
 sudo systemctl start sshd && sudo systemctl enable sshd
 
 # yay
@@ -97,8 +97,12 @@ include ~/.config/i3/config.d/*.conf
 EOF
 
 tee -a ~/.bashrc <<-EOF
+
+. "$HOME/dev/haskoe/os-install-scripts/.bash/.bashrc
+
 . "$HOME/.cargo/env"
 
-/usr/share/fzf/key-bindings.bash
-/usr/share/fzf/completion.bash[user]
+eval "$(fzf --bash)"
 EOF
+
+yay -S powershell-bin
