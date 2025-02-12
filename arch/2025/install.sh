@@ -76,6 +76,9 @@ yay -S ffmpeg
 
 # ranger 
 yay -S ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli ueberzug w3m 
+set preview_images true
+RANGER_CONFIG=~/.config/ranger/rc.conf
+perl -pi.bak -e 's/^set preview_images.*$/set preview_images true/g' $RANGER_CONFIG
 
 # ytdl .....
 
