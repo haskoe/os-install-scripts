@@ -107,6 +107,37 @@ EOF
 
 yay -S powershell-bin
 
+# postgres
+sudo pacman -S postgresql
+sudo su - postgres initdb --locale en_US.UTF-8 -D /var/lib/postgres/data
+su - postgres
+psql -c "alter user postgres with password 'password'"
+sudo perl -pibak -e 's/local.*all.*postgres.*peer/local all postgres md5/' /var/lib/postgres/data/pg_hba.conf
+sudo perl -pibak -e 's/en_DK/en_US/g' /var/lib/postgres/data/postgresql.conf 
+sudo systemctl restart postgresql.service
+sudo -u postgres createuser -s -d ${USER}
+createdb ${USER}
+psql
+
+# mise
+# read about secrets: https://mise.jdx.dev/environments/secrets.html
+curl https://mise.run | sh
+echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
+source ~/.bashrc
+mise doctor
+mise use -g uv@latest
+mise use -g bun@latest
+mise use -g go@latest
+ mise use -g erlang elixir
+ # secrets
+ mise use -g sops
+ mise use -g age
+ age-keygen -o ~/.config/mise/age.txt
+ PK=<public key>
+ sops encrypt -i --age $PK .env.json
+SOPS_AGE_KEY_FILE=~/.config/mise/age.txt
+export SOPS_AGE_KEY_FILE=~/.config/mise/age.txt
+ 
 ssh_fname=id_ed25519
 ssh-keygen -f ~/.ssh/${ssh_fname}
 # ssh-copy-id -i ~/.ssh/id_ed25519.pub user@host
