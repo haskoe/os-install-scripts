@@ -6,7 +6,7 @@ do
     fname_dir=$(dirname ${fname})
     fname_local=$(basename ${fname})
 	cd $fname_dir
-    #echo `pwd`
+    echo `pwd`
     eval $2
     cd $curdir
 done
