@@ -1,18 +1,18 @@
-sudo pacman -Syu
-sudo pacman -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain
+sudo pacman --noconfirm -Syu
+sudo pacman --noconfirm -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain
 sudo systemctl start sshd && sudo systemctl enable sshd
 
 # yay
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
 
 # sublime-merge
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-sudo pacman -Syu sublime-merge
+sudo pacman --noconfirm -Syu sublime-merge
 
 yay -S google-chrome visual-studio-code-bin  git-credential-manager
 
-yay -S powershell-bin # or powershell
+yay -S powershell # or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -29,11 +29,11 @@ sudo systemctl start docker.socket && sudo systemctl enable docker.socket
 # logout and login
 
 # tailscale 
-sudo pacman -S tailscale
+sudo pacman --noconfirm -S tailscale
 sudo systemctl start tailscaled && sudo systemctl enable tailscaled
 
 # postgres
-sudo pacman -S postgresql
+sudo pacman --noconfirm  -S postgresql
 sudo su - postgres initdb --locale en_US.UTF-8 -D /var/lib/postgres/data
 sudo perl -pibak -e 's/local.*all.*postgres.*peer/local all postgres md5/' /var/lib/postgres/data/pg_hba.conf
 sudo perl -pibak -e 's/en_DK/en_US/g' /var/lib/postgres/data/postgresql.conf 
