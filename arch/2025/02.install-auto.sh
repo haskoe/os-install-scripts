@@ -1,7 +1,3 @@
-sudo pacman --noconfirm -Syu
-sudo pacman --noconfirm -S openssh emacs-nox git base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain
-sudo systemctl start sshd && sudo systemctl enable sshd
-
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
 
@@ -51,6 +47,7 @@ yay -S quickemu # choose full package
 
 # ranger 
 yay -S ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli ueberzug w3m 
+ranger --copy-config=all
 RANGER_CONFIG=~/.config/ranger/rc.conf
 perl -pi.bak -e 's/^set preview_images.*$/set preview_images true/g' $RANGER_CONFIG
 
@@ -68,7 +65,7 @@ mkdir ${I3_CONFIG_DIR}/config.d
 # mise
 # read about secrets: https://mise.jdx.dev/environments/secrets.html
 curl https://mise.run | sh
-echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
+#echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
 source ~/.bashrc
 mise doctor
 mise use -g uv@latest

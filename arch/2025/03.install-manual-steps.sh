@@ -1,15 +1,6 @@
-echo verifying that docker works
-docker run hello-world
-read
-
-# tailscale 
-echo connecting tailscale. Activate the link
-sudo tailscale up
-read
-
 # github and azure using local gnupg password store
-GH_USER=
-GH_EMAIL=
+GH_USER=heas
+GH_EMAIL=henrik@haskoe.dk
 tee ~/.gitconfig <<-EOF
 [user]
 	name = ${GH_USER}
