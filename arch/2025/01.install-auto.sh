@@ -54,6 +54,17 @@ yay -S ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx 
 RANGER_CONFIG=~/.config/ranger/rc.conf
 perl -pi.bak -e 's/^set preview_images.*$/set preview_images true/g' $RANGER_CONFIG
 
+I3_CONFIG_DIR=~/.config/i3
+I3_CONFIG=${I3_CONFIG_DIR}/config
+tee -a ${I3_CONFIG} <<-EOF
+include ~/.config/i3/config.d/*.conf
+EOF
+perl -pi.bak -e 's/^bindsym..mod.Return/#bindsym $mod+Return/g' $I3_CONFIG 
+
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+mkdir ${I3_CONFIG_DIR}/config.d
+[[ -f ${SCRIPT_DIR}/i3-config-include.conf ]] && cp ${SCRIPT_DIR}/i3-config-include.conf  ${I3_CONFIG_DIR}/config.d
+
 # mise
 # read about secrets: https://mise.jdx.dev/environments/secrets.html
 curl https://mise.run | sh
@@ -80,13 +91,13 @@ pass init ${GPG_KEY}
 
 tee -a ~/.bashrc <<-EOF
 
-. "$HOME/dev/haskoe/os-install-scripts/.bash/.bashrc
+. "$HOME/dev/haskoe/os-install-scripts/.bash/.bashrc"
 
 . "$HOME/.cargo/env"
 
-eval "$(fzf --bash)"
+eval "\$(fzf --bash)"
 
-eval "$(/home/heas/.local/bin/mise activate bash)"
+eval "\$($HOME/.local/bin/mise activate bash)"
 EOF
  
 ssh_fname=id_ed25519
