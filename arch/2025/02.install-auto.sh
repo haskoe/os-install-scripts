@@ -1,14 +1,12 @@
 # yay
-sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
 # sublime-merge
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
 sudo pacman --noconfirm -Syu sublime-merge
 
-yay -S google-chrome visual-studio-code-bin  git-credential-manager
-
-yay -S powershell # or powershell-bin
+yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell # or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -106,7 +104,11 @@ ssh-keygen -f ~/.ssh/${ssh_fname}
 #mix phx.server
 
 # av1 example
-# for file in ./a*.mp4; do ffmpeg -i $file -c:v libsvtav1 -crf 30 ~/drtv/mkv/$file; done
+# find ./ -name 'a*.mp4' -size +2G -exec bash -c 'ffmpeg -i $0 -c:v libsvtav1 -crf 30 ~/drtv/mkv/$0' {} \;
+#he biggest strength of psy Av1 is using their Tune=3 setting as this example (for anime) and Grainsynth ofr movies
+#ffmpeg.exe -i "source anime 1080p.mkv" -c:v libsvtav1 -preset 4 -crf 32 -svtav1-params tune=3 -c:a libopus -b:a 128k "output anime 1080p.mkv"
+#For movies with lots of filmgrain i suggest also using the grainsynth option that will manage to make miracles with quality per filesize
+#tune=3:film-grain=10 
 
 #mkdir -p ~/proj/heas0404/misc
 #git clone https://heas0404@dev.azure.com/heas0404/MISC/_git/adoctest
@@ -124,3 +126,10 @@ ssh-keygen -f ~/.ssh/${ssh_fname}
 
 # i3
 # Mod1 -> Mod4
+
+# handbrake (av1)
+#sudo pacman -Syu base-devel cmake flac fontconfig freetype2 fribidi git harfbuzz jansson lame libass libbluray libjpeg-turbo libogg libsamplerate libtheora libvorbis libvpx libxml2 meson nasm ninja numactl opus python speex x264 xz
+#sudo pacman -Syu desktop-file-utils gst-libav gst-plugins-good gtk4
+
+# tmdb
+#https://www.themoviedb.org/talk/648c854526346200eb7540c4
