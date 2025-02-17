@@ -133,3 +133,9 @@ ssh-keygen -f ~/.ssh/${ssh_fname}
 
 # tmdb
 #https://www.themoviedb.org/talk/648c854526346200eb7540c4
+
+# incus
+# https://linuxcontainers.org/incus/try-it/
+# https://github.com/zabbly/incus-ui-canonical.git
+sudo pacman -S incus
+sudo systemctl start incus.socket && sudo systemctl enable incus.socket
