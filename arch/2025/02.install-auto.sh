@@ -1,3 +1,9 @@
+# locale
+PREFERRED_LOCALE=en_DK.UTF-8
+sudo perl -pibak  -e 's/^#en_DK.UTF-8/en_DK.UTF-8/g' /etc/locale.gen
+sudo locale-gen
+sudo localectl set-locale LANG=${PREFERRED_LOCALE}
+
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
@@ -28,13 +34,17 @@ sudo systemctl start tailscaled && sudo systemctl enable tailscaled
 
 # postgres
 sudo pacman --noconfirm  -S postgresql
-sudo su - postgres initdb --locale en_US.UTF-8 -D /var/lib/postgres/data
+sudo su - postgres
+initdb --locale en_DK.UTF-8 -D /var/lib/postgres/data
+exit
 sudo perl -pibak -e 's/local.*all.*postgres.*peer/local all postgres md5/' /var/lib/postgres/data/pg_hba.conf
-sudo perl -pibak -e 's/en_DK/en_US/g' /var/lib/postgres/data/postgresql.conf 
-sudo systemctl restart postgresql.service
+sudo systemctl start postgresql.service
+sudo systemctl enable postgresql.service
 sudo -u postgres createuser -s -d ${USER}
 createdb ${USER}
 psql
+# docker, available on 0.0.0.0:5432
+# docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:17-alpine
 
 yay -S otf-libertinus ttf-linux-libertine pandoc-crossref texlive-context tectonic texlive-fontsrecommended texlive-latex texlive-xetex
 yay -S quarto-cli 
