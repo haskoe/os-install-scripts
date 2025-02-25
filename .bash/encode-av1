@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[[ ! -f $1 ]] && echo invalid file && exit 1
+temp_file=$(mktemp --suffix .mp4)
+ffprobe $1 2>$temp_file
+grep -i encoder.*libsvtav1 $temp_file
+[[ $? -eq 0 ]] && rm $temp_file && exit 1
+rm $temp_file
+ffmpeg -i $1 -c:s mov_text -c:v libsvtav1 -crf 30 $temp_file
+[[ $? -eq 0 ]] && cp $temp_file $1
+ls -l $temp_file
+ rm $temp_file
