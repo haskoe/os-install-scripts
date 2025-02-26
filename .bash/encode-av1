@@ -1,15 +1,15 @@
 #!/bin/bash
 
-[[ ! -f $1 ]] && echo invalid file && exit 1
+[[ ! -f "$1" ]] && echo invalid file && exit 1
 
 MYTMPDIR="$(mktemp -d)"
 trap 'rm -rf -- "$MYTMPDIR"' EXIT
 
 temp_file=$(mktemp --tmpdir=${MYTMPDIR})
-ffprobe $1 2>$temp_file
+ffprobe "$1" 2>$temp_file
 grep -i encoder.*libsvtav1 $temp_file
 [[ $? -eq 0 ]] && exit 1
 
 temp_file=$(mktemp --suffix .mp4 --tmpdir=${MYTMPDIR})
-ffmpeg -i $1 -c:s mov_text -c:v libsvtav1 -crf 30 $temp_file
-[[ $? -eq 0 ]] && cp $temp_file $1
+ffmpeg -y -i "$1" -c:s mov_text -c:v libsvtav1 -crf 30 $temp_file
+[[ $? -eq 0 ]] && cp $temp_file "$1"
