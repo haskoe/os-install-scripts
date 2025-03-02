@@ -149,3 +149,21 @@ ssh-keygen -f ~/.ssh/${ssh_fname}
 # https://github.com/zabbly/incus-ui-canonical.git
 sudo pacman -S incus
 sudo systemctl start incus.socket && sudo systemctl enable incus.socket
+
+# r
+sudo pacman -S r gcc-fortran
+# start R and do run command: install.packages(c("pkgname"))
+# and then from shell:
+set +H
+declare -a R_PKGS=(
+  "dplyr"
+  "tidyr"
+  "ggplot2"
+  "lattice"
+  "knitr"
+  "rmarkdown"
+)
+for R_PKG in "${R_PKGS[@]}"
+do
+  Rscript -e "if (!require('${R_PKG}')) install.packages('${R_PKG}', repos='https://cloud.r-project.org')"
+done
