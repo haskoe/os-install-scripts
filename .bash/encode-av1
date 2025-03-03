@@ -5,22 +5,25 @@
 MYTMPDIR="$(mktemp -d)"
 trap 'rm -rf -- "$MYTMPDIR"' EXIT
 
-temp_file=$(mktemp --tmpdir=${MYTMPDIR})
-ffprobe "$1" 2>$temp_file # | echo ffprobe "$1" failed && exit 1
+ffprobe_temp_file=$(mktemp --tmpdir=${MYTMPDIR})
+ffprobe "$1" 2>$ffprobe_temp_file # | echo ffprobe "$1" failed && exit 1
 [[ $? -ne 0 ]] && echo ffprobe "$1" failed && exit 1
 
-grep -qi encoder.*libsvtav1 $temp_file
+grep -qi encoder.*libsvtav1 $ffprobe_temp_file
 [[ $? -eq 0 ]] && echo "$1" already in av1 format && exit 1
 # echo $1  && echo exiting && exit 1
 
-temp_file=$(mktemp --suffix .mp4 --tmpdir=${MYTMPDIR})
-ffmpeg -y -i "$1" -c:s mov_text -c:v libsvtav1 -crf 30 $temp_file
+ffmpeg_temp_file=$(mktemp --suffix .mp4 --tmpdir=${MYTMPDIR})
+ffmpeg -y -i "$1" -c:s mov_text -c:v libsvtav1 -crf 30 $ffmpeg_temp_file
 [[ $? -ne 0 ]] && echo ffmpeg conversion of "$1" failed && exit 1
 
+ffprobe $ffmpeg_temp_file 2>$ffprobe_temp_file # | echo ffprobe "$1" failed && exit 1
+[[ $? -ne 0 ]] && echo ffprobe on converted file failed && exit 1
+
 org_size=`du -k "$1" | cut -f1`
-new_size=`du -k "$temp_file" | cut -f1`
+new_size=`du -k "$ffmpeg_temp_file" | cut -f1`
 echo $org_size
 echo $new_size
-[[ $org_size -gt $new_size ]] && echo Copying. New file size less than original. && cp $temp_file "$1"
+[[ $org_size -gt $new_size ]] && echo Copying. New file size less than original. && cp $ffmpeg_temp_file "$1"
 [[ $org_size -lt $new_size ]] && echo Skippinh. New file size greater than original. 
 
