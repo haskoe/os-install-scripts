@@ -7,10 +7,12 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
+yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge
+
 # sublime-merge
-curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
-echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-sudo pacman --noconfirm -Syu sublime-merge
+#curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+#echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+#sudo pacman --noconfirm -Syu sublime-merge
 
 yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell # or powershell-bin
 
@@ -167,3 +169,10 @@ for R_PKG in "${R_PKGS[@]}"
 do
   Rscript -e "if (!require('${R_PKG}')) install.packages('${R_PKG}', repos='https://cloud.r-project.org')"
 done
+
+# nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o nix-install.sh
+bash ./nix-install.sh install
+# example
+# nix run nixpkgs#screenly-cli
+# nix shell nixpkgs#screenly-cli

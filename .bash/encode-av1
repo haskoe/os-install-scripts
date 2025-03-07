@@ -11,7 +11,7 @@ ffprobe "$1" 2>$ffprobe_temp_file # | echo ffprobe "$1" failed && exit 1
 
 grep -qi encoder.*libsvtav1 $ffprobe_temp_file
 [[ $? -eq 0 ]] && echo "$1" already in av1 format && exit 1
-# echo $1  && echo exiting && exit 1
+# echo $1 && echo exiting && exit 1
 
 ffmpeg_temp_file=$(mktemp --suffix .mp4 --tmpdir=${MYTMPDIR})
 ffmpeg -y -i "$1" -c:s mov_text -c:v libsvtav1 -crf 30 $ffmpeg_temp_file
