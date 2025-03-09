@@ -1,6 +1,8 @@
 #!/bin/bash
 
 [[ ! -f "$1" ]] && echo invalid file && exit 1
+[[ -z "$2" ]] && echo please provide directory for unprocessed files && exit 1
+[[ ! -d "$2" ]] && echo invalid directory for unprocessed files && exit 1
 
 MYTMPDIR="$(mktemp -d)"
 trap 'rm -rf -- "$MYTMPDIR"' EXIT
@@ -13,6 +15,9 @@ grep -qi encoder.*libsvtav1 $ffprobe_temp_file
 [[ $? -eq 0 ]] && echo "$1" already in av1 format && exit 1
 # echo $1 && echo exiting && exit 1
 
+base_name=$(basename $1)
+echo $base_name
+
 ffmpeg_temp_file=$(mktemp --suffix .mp4 --tmpdir=${MYTMPDIR})
 ffmpeg -y -i "$1" -c:s mov_text -c:v libsvtav1 -crf 30 $ffmpeg_temp_file
 [[ $? -ne 0 ]] && echo ffmpeg conversion of "$1" failed && exit 1
@@ -24,6 +29,6 @@ org_size=`du -k "$1" | cut -f1`
 new_size=`du -k "$ffmpeg_temp_file" | cut -f1`
 echo $org_size
 echo $new_size
-[[ $org_size -gt $new_size ]] && echo Copying. New file size less than original. && cp $ffmpeg_temp_file "$1"
-[[ $org_size -lt $new_size ]] && echo Skippinh. New file size greater than original. 
+[[ $org_size -gt $new_size ]] && echo Copying. New file size less than original. && cp $ffmpeg_temp_file "$1" && exit 1
+[[ $org_size -lt $new_size ]] && echo Skipping. New file size greater than original. && mv "$1" "$2/${base_name}"
 
