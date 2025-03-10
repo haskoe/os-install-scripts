@@ -7,7 +7,7 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge
+yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin pragmatapro-fonts
 
 # sublime-merge
 #curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
