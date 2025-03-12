@@ -14,7 +14,7 @@ yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld 
 #echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
 #sudo pacman --noconfirm -Syu sublime-merge
 
-yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell # or powershell-bin
+yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell exfat-utils testdisk # or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
