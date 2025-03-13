@@ -7,7 +7,7 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin pragmatapro-fonts
+yay -S mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin pass fzf thunar gvfs keychain fwupd less 7zip smplayer #pragmatapro-fonts pass
 
 # sublime-merge
 #curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
@@ -76,7 +76,7 @@ mkdir ${I3_CONFIG_DIR}/config.d
 # read about secrets: https://mise.jdx.dev/environments/secrets.html
 curl https://mise.run | sh
 #echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
-source ~/.bashrc
+. ~/.bashrc
 mise doctor
 mise use -g uv@latest
 mise use -g bun@latest
