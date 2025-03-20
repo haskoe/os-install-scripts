@@ -4,4 +4,5 @@ echo PubkeyAuthentication yes | sudo tee -a $CONF_FILE
 echo AuthenticationMethods publickey | sudo tee -a $CONF_FILE
 echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE
 echo PasswordAuthentication no | sudo tee -a $CONF_FILE
+
 sudo systemctl restart sshd
