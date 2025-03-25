@@ -21,7 +21,7 @@ yay -S mdbtools gmdb2
 #echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
 #sudo pacman --noconfirm -Syu sublime-merge
 
-yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell exfat-utils testdisk # or powershell-bin
+yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell-bin exfat-utils testdisk # or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -34,7 +34,7 @@ cargo install-update -a
 # docker
 sudo pacman -S docker
 sudo usermod -aG docker $USER
-sudo systemctl start docker.socket && sudo systemctl enable docker.socket
+sudo systemctl start docker.service && sudo systemctl enable docker.service
 # logout and login
 
 # tailscale 
