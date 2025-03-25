@@ -7,7 +7,14 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-yay -S base-devel gnupg pass bash-completion jq mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin fzf thunar gvfs keychain fwupd less 7zip smplayer  base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain less gvfs fwupd inotify-tools rdesktop pavucontrol udev-block-notify dunst thunderbird inotify-tools tk rsync #pragmatapro-fonts pass
+yay -S base-devel dracut gnupg pass bash-completion jq mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin fzf thunar gvfs keychain fwupd less 7zip smplayer  base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain less gvfs fwupd inotify-tools rdesktop pavucontrol udev-block-notify dunst thunderbird inotify-tools tk rsync #pragmatapro-fonts pass
+
+# erlang/elixir stuff
+yay -S inets erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
+yay -S virtualbox virtualbox-host-modules-arch
+# microsoft access
+yay -S mdbtools gmdb2
+
 
 # sublime-merge
 #curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
