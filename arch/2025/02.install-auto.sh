@@ -183,3 +183,9 @@ bash ./nix-install.sh install
 # example
 # nix run nixpkgs#screenly-cli
 # nix shell nixpkgs#screenly-cli
+
+# uv
+uv init uv-test
+cd uv-test
+uv add package
+uv run ...py
