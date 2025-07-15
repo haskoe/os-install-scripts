@@ -7,7 +7,7 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 # yay
 sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-yay -S base-devel dracut gnupg pass bash-completion jq mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin fzf thunar gvfs keychain fwupd less 7zip smplayer  base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain less gvfs fwupd inotify-tools rdesktop pavucontrol udev-block-notify dunst thunderbird inotify-tools tk rsync ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono #pragmatapro-fonts pass
+yay -S base-devel net-tools dracut gnupg pass bash-completion jq mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin fzf thunar gvfs keychain fwupd less 7zip smplayer  base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain less gvfs fwupd inotify-tools rdesktop pavucontrol udev-block-notify dunst thunderbird inotify-tools tk rsync ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono #pragmatapro-fonts pass
 
 # erlang/elixir stuff
 yay -S inets erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
@@ -161,6 +161,17 @@ sudo systemctl start incus.socket && sudo systemctl enable incus.socket
 
 # r
 sudo pacman -S r gcc-fortran
+mkdir -p ~/.rhome/lib
+touch ~/.rhome/.Rprofile
+touch ~/.rhome/.Rhistory
+
+tee -a ~/.Renviron <<-EOF
+R_HOME_USER = "/home/heas/.rhome"
+R_PROFILE_USER = "/home/heas/.rhome/.Rprofile"
+R_LIBS_USER = "/home/heas/.rhome/lib"
+R_HISTFILE = "/home/heas/.rhome/.Rhistory"
+EOF
+
 # start R and do run command: install.packages(c("pkgname"))
 # and then from shell:
 set +H
@@ -171,6 +182,7 @@ declare -a R_PKGS=(
   "lattice"
   "knitr"
   "rmarkdown"
+  "shiny"
 )
 for R_PKG in "${R_PKGS[@]}"
 do
