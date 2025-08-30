@@ -17,6 +17,7 @@ eval `keychain --eval --agents ssh id_ed25519`
 
 #echo $PATH
 export PATH=$PATH:$SCRIPTPATH:$HOME/proj/heas0404/cs/repos/tools/db/unix
+#export PATH=$PATH:$HOME/.dotnet:$SCRIPTPATH:$HOME/proj/heas0404/cs/repos/tools/db/unix
 # export PATH=$BUN_INSTALL/bin:$HOME/.asdf/shims:$HOME/.local/bin:$SCRIPTPATH:$HOME/proj/heas0404/cs/repos/tools/db/unix:$PATH
 #export PYTHONPATH=$HOME/dev/haskoe/organize:$HOME/proj/heas0404/misc/repos/MISC/python
 

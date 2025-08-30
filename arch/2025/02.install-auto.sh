@@ -5,13 +5,17 @@ sudo locale-gen
 sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 
 # yay
-sudo pacman --noconfirm -S --needed git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
+sudo pacman --noconfirm -S --needed lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-yay -S base-devel net-tools dracut gnupg pass bash-completion jq mplayer vlc hunspell-da hunspell-en ttc-iosevka task goreleaser-bin meld lazygit zellij broot sublime-merge rustdesk-bin fzf thunar gvfs keychain fwupd less 7zip smplayer  base-devel gnupg pass bash-completion jq thunar tmux fzf terminator wezterm zstd 7zip inotify-tools ffmpeg keychain less gvfs fwupd inotify-tools rdesktop pavucontrol udev-block-notify dunst thunderbird inotify-tools tk rsync ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono #pragmatapro-fonts pass
+sudo pacman --noconfirm -S fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
+sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar tmux terminator wezterm zstd 
+sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync 
+sudo pacman --noconfirm -S libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
+yay -S pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
 
 # erlang/elixir stuff
-yay -S inets erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
-yay -S virtualbox virtualbox-host-modules-arch
+sudo pacman --noconfirm -S erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
+#yay -S virtualbox virtualbox-host-modules-arch
 # microsoft access
 yay -S mdbtools gmdb2
 
@@ -21,14 +25,15 @@ yay -S mdbtools gmdb2
 #echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
 #sudo pacman --noconfirm -Syu sublime-merge
 
-yay -S google-chrome visual-studio-code-bin  git-credential-manager firefox  yt-dlp powershell-bin exfat-utils testdisk # or powershell-bin
+sudo pacman --noconfirm -S yt-dlp exfat-utils testdisk
+yay -S google-chrome visual-studio-code-bin git-credential-manager powershell-bin# or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 . "$HOME/.cargo/env"
 # cargo-binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-cargo-binstall bat bottom dirstat-rs du-dust exa fd-find ripgrep cargo-edit cargo-update
+cargo-binstall bat bottom dirstat-rs du-dust exa ripgrep cargo-edit cargo-update
 cargo install-update -a
 
 # docker
@@ -40,6 +45,7 @@ sudo systemctl start docker.service && sudo systemctl enable docker.service
 # tailscale 
 sudo pacman --noconfirm -S tailscale
 sudo systemctl start tailscaled && sudo systemctl enable tailscaled
+sudo tailscale up
 
 # postgres
 sudo pacman --noconfirm  -S postgresql
@@ -88,7 +94,7 @@ mise doctor
 mise use -g uv@latest
 mise use -g bun@latest
 mise use -g go@latest
-mise use -g erlang elixir
+mise use -g erlang@latest elixir@latest
 mix archive.install hex phx_new
 # secrets
 mise use -g sops
