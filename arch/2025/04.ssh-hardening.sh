@@ -5,5 +5,8 @@ echo AuthenticationMethods publickey | sudo tee -a $CONF_FILE
 echo ChallengeResponseAuthentication no | sudo tee -a $CONF_FILE
 echo PasswordAuthentication no | sudo tee -a $CONF_FILE
 echo X11Forwarding yes | sudo tee -a $CONF_FILE
+echo AllowTcpForwarding yes | sudo tee -a $CONF_FILE
+echo X11UseLocalhost yes | sudo tee -a $CONF_FILE
+echo X11DisplayOffset 10 | sudo tee -a $CONF_FILE
 
 sudo systemctl restart sshd
