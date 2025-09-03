@@ -18,6 +18,14 @@ alias rds='rustup default stable'
 alias rdb='rustup default beta'
 alias rdn='rustup default nightly'
 
+alias pandoc='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/core'
+alias pl='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/latex'
+alias pe='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/extra'
+alias pt='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/typst'
+ptpdf() {
+    pt $1.md -f markdown --wrap=none -t pdf --pdf-engine=typst -V template=article.typ -o $1.pdf
+}
+
 alias gpl='git pull'
 alias gpu='git push'
 alias gs='git status'
