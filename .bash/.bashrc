@@ -23,3 +23,4 @@ export PATH=$PATH:$SCRIPTPATH:$HOME/proj/heas0404/cs/repos/tools/db/unix
 
 #[ -f /usr/share/doc/fzf/examples/key-bindings.bash ] && source /usr/share/doc/fzf/examples/key-bindings.bash
 #[ -f /usr/share/bash-completion/completions/fzf ] && source /usr/share/bash-completion/completions/fzf
+shopt -s globstar
