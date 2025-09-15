@@ -1,3 +1,7 @@
+adoc-resume() {
+    adoc -a lang=$2 -a person=$1 -o output/resume-$1-$2.pdf resume.adoc
+}
+
 alias q='docker run --rm --volume $(pwd):/data jdutant/quarto-latex'
 
 # put this in ~/.bashrc
@@ -17,6 +21,8 @@ alias rup='rustup update'
 alias rds='rustup default stable'
 alias rdb='rustup default beta'
 alias rdn='rustup default nightly'
+
+alias adoc='docker run --rm -v "$(pwd):/documents" asciidoctor/docker-asciidoctor asciidoctor-pdf -r asciidoctor-diagram'
 
 alias pandoc='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/core'
 alias pl='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/latex'
