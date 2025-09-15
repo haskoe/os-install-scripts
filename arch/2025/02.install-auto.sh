@@ -10,13 +10,15 @@ sudo perl -pibak  -e 's/^#AllowSuspend/AllowSuspend/g' /etc/systemd/sleep.conf
 sudo pacman --noconfirm -S --needed lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
 sudo pacman --noconfirm -S fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
-sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar tmux terminator wezterm zstd 
+sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd 
 sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync 
 sudo pacman --noconfirm -S libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
 yay -S pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
 yay -S alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
 yay -S tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
 yay -S otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
+yay -S upower acpi power-profiles-daemon
+yay -S sshfs
 
 # erlang/elixir stuff
 sudo pacman --noconfirm -S erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
@@ -66,7 +68,7 @@ psql
 # docker, available on 0.0.0.0:5432
 # docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:17-alpine
 
-yay -S otf-libertinus ttf-linux-libertine pandoc-crossref texlive-context tectonic texlive-fontsrecommended texlive-latex texlive-xetex
+yay -S otf-libertinus ttf-linux-libertine texlive-context tectonic texlive-fontsrecommended texlive-latex texlive-xetex
 yay -S quarto-cli 
 
 # qemu 
@@ -96,10 +98,8 @@ curl https://mise.run | sh
 #echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
 . ~/.bashrc
 mise doctor
-mise use -g uv@latest
-mise use -g bun@latest
-mise use -g go@latest
-mise use -g erlang@latest elixir@latest
+mise use -g uv@latest bun@latest go@latest erlang@latest elixir@latest python@latest
+
 mix archive.install hex phx_new
 # secrets
 mise use -g sops
