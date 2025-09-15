@@ -4,6 +4,8 @@ sudo perl -pibak  -e 's/^#en_DK.UTF-8/en_DK.UTF-8/g' /etc/locale.gen
 sudo locale-gen
 sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 
+sudo perl -pibak  -e 's/^#AllowSuspend/AllowSuspend/g' /etc/systemd/sleep.conf
+
 # yay
 sudo pacman --noconfirm -S --needed lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
@@ -12,6 +14,9 @@ sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass b
 sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync 
 sudo pacman --noconfirm -S libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
 yay -S pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
+yay -S alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
+yay -S tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
+yay -S otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
 
 # erlang/elixir stuff
 sudo pacman --noconfirm -S erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
@@ -198,6 +203,9 @@ done
 # nix
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o nix-install.sh
 bash ./nix-install.sh install
+nix run 'nixpkgs#nix-index' --extra-experimental-features 'nix-command flakes'
+# nix comma
+# , rg a
 # example
 # nix run nixpkgs#screenly-cli
 # nix shell nixpkgs#screenly-cli
@@ -207,3 +215,5 @@ uv init uv-test
 cd uv-test
 uv add package
 uv run ...py
+# uv textual
+# uvx --python 3.12 textual-demo
