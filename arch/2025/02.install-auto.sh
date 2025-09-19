@@ -11,7 +11,7 @@ sudo pacman --noconfirm -S --needed lshw autorandr git base-devel && git clone h
 
 sudo pacman --noconfirm -S fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
 sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd 
-sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync 
+sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync dmidecode
 sudo pacman --noconfirm -S libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
 yay -S pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
 yay -S alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
