@@ -1,14 +1,22 @@
+registry "receive updates for other microsoft products"
+
+ms-settings:windowsupdate 
+Get-AppxPackage -AllUsers | Select-Object Name, PackageFullName"
+
 # install winget
-Install-Script -Name winget-install -RequiredVersion 3.2.6
+#Install-Script -Name winget-install -RequiredVersion 3.2.6
 https://github.com/microsoft/winget-cli/releases
 
-winget install -e --id Python.Python.3.12
-winget install --id=RustDesk.RustDesk  -e
+
+winget install -e --id RustDesk.RustDesk
+winget install -e --id Google.Chrome
+winget install -e --id Python.Python.3.13
+winget install -e --id Git.Git
+winget install -e --id TortoiseGit.TortoiseGit
+
 winget install --id=Google.Chrome  -e
 winget install -e --id Microsoft.VisualStudioCode
 winget install Microsoft.DotNet.SDK.6
-winget install -e --id Git.Git
-winget install -e --id TortoiseGit.TortoiseGit
 
 Enable-ComputerRestore -Drive "C:\"
 Get-ComputerRestorePoint

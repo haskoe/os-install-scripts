@@ -1,4 +1,5 @@
 # Nix comma
+nix run 'nixpkgs#nix-index' --extra-experimental-features 'nix-command flakes'
 nix-env -f '<nixpkgs>' -iA comma
 , rg a
 
