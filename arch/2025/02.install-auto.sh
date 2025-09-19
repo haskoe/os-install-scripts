@@ -6,34 +6,37 @@ sudo localectl set-locale LANG=${PREFERRED_LOCALE}
 
 sudo perl -pibak  -e 's/^#AllowSuspend/AllowSuspend/g' /etc/systemd/sleep.conf
 
+alias sudo='sudo '
+alias yays='yay --needed --noconfirm -S'
+alias pacs='pacman --needed --noconfirm -S'
 # yay
-sudo pacman --noconfirm -S --needed lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
+sudo pacs lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
-sudo pacman --noconfirm -S fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
-sudo pacman --noconfirm -S fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd 
-sudo pacman --noconfirm -S inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync dmidecode
-sudo pacman --noconfirm -S libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
-yay -S pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
-yay -S alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
-yay -S tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
-yay -S otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
-yay -S upower acpi power-profiles-daemon
-yay -S sshfs
+sudo pacs fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
+sudo pacs fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd 
+sudo pacs inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync dmidecode
+sudo pacs libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
+yays pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
+yays alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
+yays tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
+yays otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
+yays upower acpi power-profiles-daemon
+yays sshfs
 
 # erlang/elixir stuff
-sudo pacman --noconfirm -S erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
-#yay -S virtualbox virtualbox-host-modules-arch
+sudo pacs erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
+#yays virtualbox virtualbox-host-modules-arch
 # microsoft access
-yay -S mdbtools gmdb2
+yays mdbtools gmdb2
 
 
 # sublime-merge
 #curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
 #echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
-#sudo pacman --noconfirm -Syu sublime-merge
+#sudo pacsyu sublime-merge
 
-sudo pacman --noconfirm -S yt-dlp exfat-utils testdisk
-yay -S google-chrome visual-studio-code-bin git-credential-manager powershell-bin# or powershell-bin
+sudo pacs yt-dlp exfat-utils testdisk
+yays google-chrome visual-studio-code-bin git-credential-manager powershell-bin# or powershell-bin
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -50,7 +53,7 @@ sudo systemctl start docker.service && sudo systemctl enable docker.service
 # logout and login
 
 # tailscale 
-sudo pacman --noconfirm -S tailscale
+sudo pacs tailscale
 sudo systemctl start tailscaled && sudo systemctl enable tailscaled
 sudo tailscale up
 
@@ -68,15 +71,15 @@ psql
 # docker, available on 0.0.0.0:5432
 # docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:17-alpine
 
-yay -S otf-libertinus ttf-linux-libertine texlive-context tectonic texlive-fontsrecommended texlive-latex texlive-xetex
-yay -S quarto-cli 
+yays otf-libertinus ttf-linux-libertine texlive-context tectonic texlive-fontsrecommended texlive-latex texlive-xetex
+yays quarto-cli 
 
 # qemu 
-yay -S quickemu # choose full package
+yays quickemu # choose full package
 # example: quickemu --vm ~/quickemu/windows-11.conf --display spice
 
 # ranger 
-yay -S ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli ueberzug w3m 
+yays ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli ueberzug w3m 
 ranger --copy-config=all
 RANGER_CONFIG=~/.config/ranger/rc.conf
 perl -pi.bak -e 's/^set preview_images.*$/set preview_images true/g' $RANGER_CONFIG
