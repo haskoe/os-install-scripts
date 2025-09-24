@@ -13,7 +13,7 @@ alias pacs='pacman --needed --noconfirm -S'
 sudo pacs lshw autorandr git base-devel && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si 
 
 sudo pacs fd net-tools dracut jq mplayer smplayer vlc hunspell ttc-iosevka task meld lazygit lazydocker zellij broot htop
-sudo pacs fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd 
+sudo pacs fzf thunar gvfs keychain fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd unrar
 sudo pacs inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thunderbird tk rsync dmidecode
 sudo pacs libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
 yays pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
@@ -22,6 +22,46 @@ yays tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui
 yays otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
 yays upower acpi power-profiles-daemon
 yays sshfs
+
+# yazi
+yays yazi chafa ueberzugpp xclip xsel wl-copy resvg
+
+# yazi office preview, slow ....
+ya pkg add macydnah/office
+
+YAZI_CONFIG_DIR=~/.config/yazi
+mkdir -p ${YAZI_CONFIG_DIR}
+tee -a ${YAZI_CONFIG_DIR}/yazi.toml <<-EOF
+[mgr]
+show_hidden = true
+ratio = [1, 2, 5]
+
+[preview]
+max_width = 3840
+max_height = 2160
+image_quality = 90
+wrap = "yes"
+
+[plugin]
+
+prepend_preloaders = [
+    # Office Documents
+    { mime = "application/openxmlformats-officedocument.*", run = "office" },
+    { mime = "application/oasis.opendocument.*", run = "office" },
+    { mime = "application/ms-*", run = "office" },
+    { mime = "application/msword", run = "office" },
+    { name = "*.docx", run = "office" },
+]
+
+prepend_previewers = [
+    # Office Documents
+    { mime = "application/openxmlformats-officedocument.*", run = "office" },
+    { mime = "application/oasis.opendocument.*", run = "office" },
+    { mime = "application/ms-*", run = "office" },
+    { mime = "application/msword", run = "office" },
+    { name = "*.docx", run = "office" },
+]
+EOF
 
 # erlang/elixir stuff
 sudo pacs erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
@@ -79,7 +119,7 @@ yays quickemu # choose full package
 # example: quickemu --vm ~/quickemu/windows-11.conf --display spice
 
 # ranger 
-yays ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli ueberzug w3m 
+yays ranger atool elinks ffmpegthumbnailer highlight imagemagick libcaca lynx mediainfo odt2txt perl-image-exiftool poppler transmission-cli w3m abiword catdoc
 ranger --copy-config=all
 RANGER_CONFIG=~/.config/ranger/rc.conf
 perl -pi.bak -e 's/^set preview_images.*$/set preview_images true/g' $RANGER_CONFIG
