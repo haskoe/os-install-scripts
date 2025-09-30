@@ -21,7 +21,7 @@ yays alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
 yays tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
 yays otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
 yays upower acpi power-profiles-daemon
-yays sshfs
+yays sshfs elvish llama.cpp-vulkan
 
 # yazi
 yays yazi chafa ueberzugpp xclip xsel wl-copy resvg
@@ -92,6 +92,7 @@ sudo usermod -aG docker $USER
 sudo systemctl start docker.service && sudo systemctl enable docker.service
 # logout and login
 
+yay -S docker-buildx buildkit
 # tailscale 
 sudo pacs tailscale
 sudo systemctl start tailscaled && sudo systemctl enable tailscaled
