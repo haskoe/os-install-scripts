@@ -21,7 +21,11 @@ yays alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
 yays tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
 yays otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
 yays upower acpi power-profiles-daemon
-yays sshfs elvish llama.cpp-vulkan
+yays sshfs elvish 
+
+# llama
+yay -S llama.cpp-vulkan
+# llama-server --threads -1 -ngl 99 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.01 --port 10000 --host 127.0.0.1 --ctx-size 16180 --model ./Downloads/Qwen3-Coder-30B-A3B-Instruct-UD-IQ2_M.gguf --cpu-moe --n-cpu-moe 8 -ub 512 -b 512 --flash-attn on
 
 # yazi
 yays yazi chafa ueberzugpp xclip xsel wl-copy resvg
