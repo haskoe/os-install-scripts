@@ -18,7 +18,7 @@ sudo pacs inotify-tools ffmpeg keychain less gvfs rdesktop pavucontrol dunst thu
 sudo pacs libreoffice fastfetch impala btop zoxide eza ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono
 yays pinta hunspell-da goreleaser-bin sublime-merge rustdesk-bin udev-block-notify
 yays alsamixer alsa-utils pipewire-pulse pipewire pwvucontrol
-yays tldr arj fclones iwgtk sparrow-wifi-gitmutt turbostat cpupower cpupower-gui gparted catdoc typst
+yays tldr arj fclones iwgtk sparrow-wifi-git mutt turbostat cpupower cpupower-gui gparted catdoc typst
 yays otf-libertinus ttf-linux-libertine ttf-bitstream-charter texlive-font texlive-fontsextra texlive-fontsrecommended ttf-barlow texlive-minionpro-git
 yays upower acpi power-profiles-daemon
 yays sshfs elvish 
@@ -71,7 +71,6 @@ EOF
 sudo pacs erlang-inets erlang-os_mon erlang-runtime_tools erlang-ssl erlang-xmerl erlang-parsetools
 #yays virtualbox virtualbox-host-modules-arch
 # microsoft access
-yays mdbtools gmdb2
 
 
 # sublime-merge
@@ -146,7 +145,20 @@ curl https://mise.run | sh
 #echo "eval \"\$(/home/heas/.local/bin/mise activate bash)\"" >> ~/.bashrc
 . ~/.bashrc
 mise doctor
-mise use -g uv@latest bun@latest go@latest erlang@latest elixir@latest python@latest
+mise use -g uv@latest bun@latest go@latest erlang@latest elixir@latest python@latest'
+
+# update mise config.toml
+MISE_CONFIG_FILE=~/.config/mise/config.toml 
+tee -a ${MISE_CONFIG_FILE} <<-EOF
+
+[settings]
+python.uv_venv_auto = true
+
+[tasks]
+# You can define shortcuts for uv commands here
+#dev = "uv run python main.py"
+#test = "uv run pytest"
+EOF
 
 mix archive.install hex phx_new
 # secrets
