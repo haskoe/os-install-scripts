@@ -28,7 +28,7 @@ fi
 # 3. Installer AUR pakker (-bin)
 echo "💎 Installerer AUR pakker..."
 yay -S --noconfirm vscodium-bin google-chrome starship-bin
-yay -S --noconfirm solaar impala lazaygit lazydocker
+yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager -bin llama.cpp-vulkan 
 
 # 4. Start services
 echo "🔌 Starter Docker, Incus og Tailscale..."
