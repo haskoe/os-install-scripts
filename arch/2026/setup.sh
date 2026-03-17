@@ -75,6 +75,18 @@ export PATH="$PATH:$CARGO_BIN"
 echo "📝 Opsætter konfigurationer..."
 mkdir -p ~/.config/yazi ~/.config/Code/User
 
+I3_CONFIG_DIR=~/.config/i3
+I3_CONFIG=${I3_CONFIG_DIR}/config
+tee -a ${I3_CONFIG} <<-EOF
+include ~/.config/i3/config.d/*.conf
+EOF
+perl -pi.bak -e 's/^bindsym..mod.Return/#bindsym $mod+Return/g' $I3_CONFIG 
+
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+mkdir ${I3_CONFIG_DIR}/config.d
+[[ -f ${SCRIPT_DIR}/i3-config-include.conf ]] && cp ${SCRIPT_DIR}/i3-config-include.conf  ${I3_CONFIG_DIR}/config.d
+
+
 # Yazi Keymap
 cat <<EOF > ~/.config/yazi/keymap.toml
 [manager]
