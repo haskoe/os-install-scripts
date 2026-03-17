@@ -10,7 +10,9 @@ echo "📦 Installerer systempakker..."
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm openssh base-devel git docker tailscale fzf trash-cli keychain openssh
 # arch-install-scripts python-psutil
-sudo pacman -S --needed --noconfirm yazi ffmpeg 7zip jq poppler zoxide resvg imagemagick
+sudo pacman -S --needed --noconfirm yazi ffmpeg 7zip jq poppler zoxide resvg imagemagick inotify-tools 
+sudo pacman -S --needed --noconfirm mplayer smplayer fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd unrar
+sudo pacman -S --needed --noconfirm mplayer smplayer fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd unrar
 
 # uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
