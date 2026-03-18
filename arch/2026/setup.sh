@@ -36,7 +36,7 @@ fi
 # 3. Installer AUR pakker (-bin)
 echo "💎 Installerer AUR pakker..."
 yay -S --noconfirm vscodium-bin google-chrome starship-bin quarto-cli-bin  qemu-full quickemu cpupower power-profiles-daemon
-yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager-bin # llama.cpp-vulkan 
+yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan 
 yay -S --noconfirm thermald asusctl 
 
 # 4. Start services
