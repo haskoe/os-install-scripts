@@ -15,7 +15,7 @@ sudo localectl set-x11-keymap dk
 # 1. Installer officielle pakker
 echo "📦 Installerer systempakker..."
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm openssh base-devel git docker tailscale fzf trash-cli keychain openssh autorandr
+sudo pacman -S --needed --noconfirm openssh base-devel git docker tailscale fzf trash-cli keychain openssh autorandr rsync thunderbird
 # arch-install-scripts python-psutil
 sudo pacman -S --needed --noconfirm yazi ffmpeg 7zip jq poppler zoxide resvg imagemagick inotify-tools pass gpg
 sudo pacman -S --needed --noconfirm mplayer smplayer fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd unrar
@@ -36,8 +36,8 @@ fi
 # 3. Installer AUR pakker (-bin)
 echo "💎 Installerer AUR pakker..."
 yay -S --noconfirm vscodium-bin google-chrome starship-bin quarto-cli-bin  qemu-full quickemu cpupower power-profiles-daemon
-yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan 
-yay -S --noconfirm thermald asusctl 
+yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan
+yay -S --noconfirm thermald asusctl
 
 # 4. Start services
 echo "🔌 Starter Docker, Incus og Tailscale..."
@@ -103,7 +103,7 @@ I3_CONFIG=${I3_CONFIG_DIR}/config
 tee -a ${I3_CONFIG} <<-EOF
 include ~/.config/i3/config.d/*.conf
 EOF
-perl -pi.bak -e 's/^bindsym..mod.Return/#bindsym $mod+Return/g' $I3_CONFIG 
+perl -pi.bak -e 's/^bindsym..mod.Return/#bindsym $mod+Return/g' $I3_CONFIG
 
 mkdir ${I3_CONFIG_DIR}/config.d
 tee -a ${I3_CONFIG_DIR}/config.d/i3-include-config <<'EOF'
@@ -260,6 +260,46 @@ tee ~/.gitconfig-heas0404 <<EOF
 [user]
 name = heas
 email = heas@gott-it.dk
+EOF
+
+# opencode
+curl -fsSL https://opencode.ai/install | bash
+source ~/.bashrc
+OPENCODE_CONFIG_DIR=~/.config/opencode
+[[ ! -d $OPENCODE_CONFIG_DIR ]] && mkdir -p $OPENCODE_CONFIG_DIR
+tee ${OPENCODE_CONFIG_DIR}/opencode.json.new <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "llama.cpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama-server (local)",
+      "options": {
+        "baseURL": "http://s990:8080/v1"
+      },
+      "models": {
+        "glm-4.6v-flash": {
+          "name": "GLM-4.6V-Flash (local)",
+          "modalities": { "input": ["image", "text"], "output": ["text"] },
+          "limit": {
+            "context": 32000,
+            "output": 65536
+          }
+        }
+      }
+    }
+  }
+}
+EOF
+OPENCODE_SHARE_DIR=~/.local/share/opencode
+[[ ! -d $OPENCODE_SHARE_DIR ]] && mkdir -p $OPENCODE_SHARE_DIR
+tee ${OPENCODE_CONFIG_DIR}/auth.json.new <<EOF
+{
+  "openrouter": {
+    "type": "api",
+    "key": "you key here"
+  }
+}
 EOF
 
 # Mode til manuel styring af Ryzen AI 365 Power Profiles
