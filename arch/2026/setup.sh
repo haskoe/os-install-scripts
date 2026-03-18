@@ -267,7 +267,7 @@ curl -fsSL https://opencode.ai/install | bash
 source ~/.bashrc
 OPENCODE_CONFIG_DIR=~/.config/opencode
 [[ ! -d $OPENCODE_CONFIG_DIR ]] && mkdir -p $OPENCODE_CONFIG_DIR
-tee ${OPENCODE_CONFIG_DIR}/opencode.json.new <<EOF
+tee ${OPENCODE_CONFIG_DIR}/opencode.json <<EOF
 {
   "\$schema": "https://opencode.ai/config.json",
   "provider": {
@@ -293,12 +293,29 @@ tee ${OPENCODE_CONFIG_DIR}/opencode.json.new <<EOF
 EOF
 OPENCODE_SHARE_DIR=~/.local/share/opencode
 [[ ! -d $OPENCODE_SHARE_DIR ]] && mkdir -p $OPENCODE_SHARE_DIR
-tee ${OPENCODE_CONFIG_DIR}/auth.json.new <<EOF
+tee ${OPENCODE_CONFIG_DIR}/auth.json <<EOF
 {
   "openrouter": {
     "type": "api",
-    "key": "you key here"
+    "key": "you openrouter key here"
   }
+}
+EOF
+
+# claude
+curl -fsSL https://claude.ai/install.sh | bash
+tee ~/.claude.json <<EOF
+{
+  "installMethod": "native",
+  "autoUpdates": true,
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "your key here",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "minimax/minimax-m2.5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "minimax/minimax-m2.5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "minimax/minimax-m2.5",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "OTEL_METRICS_EXPORTER": "otlp"
+  },
 }
 EOF
 
