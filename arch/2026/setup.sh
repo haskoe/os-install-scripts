@@ -17,7 +17,7 @@ echo "📦 Installerer systempakker..."
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm openssh base-devel git docker tailscale fzf trash-cli keychain openssh autorandr rsync thunderbird
 # arch-install-scripts python-psutil
-sudo pacman -S --needed --noconfirm yazi ffmpeg 7zip jq poppler zoxide resvg imagemagick inotify-tools pass gpg
+sudo pacman -S --needed --noconfirm ffmpeg 7zip jq poppler zoxide resvg imagemagick inotify-tools pass gpg
 sudo pacman -S --needed --noconfirm mplayer smplayer fwupd less 7zip gnupg pass bash-completion thunar terminator wezterm zstd unrar
 
 # uv
@@ -33,11 +33,28 @@ if ! command -v yay &> /dev/null; then
     cd -
 fi
 
-# 3. Installer AUR pakker (-bin)
+# 3. Installer AUR pakker (-bin)g
 echo "💎 Installerer AUR pakker..."
-yay -S --noconfirm vscodium-bin google-chrome starship-bin quarto-cli-bin  qemu-full quickemu cpupower power-profiles-daemon
-yay -S --noconfirm solaar impala lazaygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan
-yay -S --noconfirm thermald asusctl
+yay -S --noconfirm visual-studio-code-bin google-chrome starship-bin quarto-cli-bin  qemu-full quickemu cpupower power-profiles-daemon
+yay -S --noconfirm solaar impala lazygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan
+yay -S --noconfirm thermald asusctl flameshot tldr sshfs
+
+# quarto, typst, r
+yay -S --noconfirm quarto-cli-bin r gcc-fortran typst
+# r
+mkdir -p ~/.rhome/lib
+touch ~/.rhome/.Rprofile
+touch ~/.rhome/.Rhistory
+
+tee -a ~/.Renviron <<-EOF
+R_HOME_USER = "/home/heas/.rhome"
+R_PROFILE_USER = "/home/heas/.rhome/.Rprofile"
+R_LIBS_USER = "/home/heas/.rhome/lib"
+R_HISTFILE = "/home/heas/.rhome/.Rhistory"
+EOF
+
+PAKKER="ggplot2,dplyr,tidyr,rmarkdown,patchwork,tinytable,modelsummary,showtext"
+Rscript -e "p <- strsplit('$PAKKER', ',')[[1]]; install.packages(p, repos='https://cloud.r-project.org')"
 
 # 4. Start services
 echo "🔌 Starter Docker, Incus og Tailscale..."
@@ -80,7 +97,17 @@ fi
 # 7. Cargo-binstall & Rust tools
 echo "🦀 Installerer Rust værktøjer..."
 curl -L https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-~/.cargo/bin/cargo-binstall -y ripgrep fd-find starship
+~/.cargo/bin/cargo-binstall -y ripgrep fd-find starship cargo-update
+# cargo-install-update install-update
+
+# yazi
+~/.cargo/bin/cargo-binstall -y yazi-fm
+yay -S mediainfo exiftool duckdb ouch
+ya pkg add boydaihungst/mediainfo
+ya pkg add wylie102/duckdb
+ya pkg add Reledia/glow
+ya pkg add ndtoan96/ouch
+ya pkg add h-hg/yamb
 
 tee -a ~/.bashrc <<'EOF'
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
