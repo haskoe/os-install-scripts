@@ -37,7 +37,7 @@ fi
 echo "💎 Installerer AUR pakker..."
 yay -S --noconfirm visual-studio-code-bin google-chrome starship-bin quarto-cli-bin  qemu-full quickemu cpupower power-profiles-daemon
 yay -S --noconfirm solaar impala lazygit lazydocker git-credential-manager-bin gvfs thunar-volman udisks2 # llama.cpp-vulkan
-yay -S --noconfirm thermald asusctl flameshot tldr sshfs
+yay -S --noconfirm thermald asusctl flameshot tldr sshfs xnviewmp
 
 # quarto, typst, r
 yay -S --noconfirm quarto-cli-bin r gcc-fortran typst
@@ -98,7 +98,7 @@ fi
 echo "🦀 Installerer Rust værktøjer..."
 curl -L https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 ~/.cargo/bin/cargo-binstall -y ripgrep fd-find starship cargo-update
-# cargo-install-update install-update
+# cargo-install-update install-update --all
 
 # yazi
 ~/.cargo/bin/cargo-binstall -y yazi-fm
@@ -108,6 +108,20 @@ ya pkg add wylie102/duckdb
 ya pkg add Reledia/glow
 ya pkg add ndtoan96/ouch
 ya pkg add h-hg/yamb
+
+# yazi config
+YAZI_CONFIG_DIR=~/.config/yazi
+[[ ! -d ${YAZI_CONFIG_DIR} ]] && mkdir -p ${YAZI_CONFIG_DIR}
+KEYMAP_TOML=yazi-keymap.toml
+[[ -f $(fd ${KEYMAP_TOML}) ]] && cp $(fd ${KEYMAP_TOML}) ${YAZI_CONFIG_DIR}/keymap.toml
+
+# plugins
+YAZI_PLUGIN_DIR=${YAZI_CONFIG_DIR}/plugins
+YAZI_PLUGIN=sidecar.yazi
+[[ ! -d ${YAZI_PLUGIN_DIR}/${YAZI_PLUGIN} ]] && mkdir -p ${YAZI_PLUGIN_DIR}/${YAZI_PLUGIN}
+rm ${YAZI_PLUGIN_DIR}/${YAZI_PLUGIN}/*.lua
+[[ -f $(fd ${YAZI_PLUGIN}) ]] && cp $(fd ${YAZI_PLUGIN}) ${YAZI_PLUGIN_DIR}/${YAZI_PLUGIN}/main.lua
+
 
 tee -a ~/.bashrc <<'EOF'
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"

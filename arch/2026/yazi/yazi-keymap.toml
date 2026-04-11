@@ -1,0 +1,28 @@
+[mgr]
+prepend_keymap = [
+    { on = "<F9>", run = "plugin mediainfo -- toggle-metadata", desc = "Toggle media preview metadata" },
+
+    { on = [ "l" ], run = "plugin --sync smart-enter", desc = "Enter or Open" },
+    { on = [ "g", "c" ], run = "cd ~/.config", desc = "Go to Config" },
+    { on = [ "C" ], run = "shell 'vscodium .'", desc = "Open in VSCodium" },
+    { on = [ "d" ], run = "shell 'trash-put \"$@\"' --confirm", desc = "Trash" },
+
+    { on = ["<C-e>"], run = "seek 5" },
+    { on = ["<C-y>"], run = "seek -5" },
+
+    { on = [ "u", "a" ], run = "plugin yamb -- save", desc = "Add bookmark" },
+    { on = [ "u", "g" ], run = "plugin yamb -- jump_by_key", desc = "Jump bookmark by key" },
+    { on = [ "u", "G" ], run = "plugin yamb -- jump_by_fzf", desc = "Jump bookmark by fzf" },
+    { on = [ "u", "d" ], run = "plugin yamb -- delete_by_key", desc = "Delete bookmark by key" },
+    { on = [ "u", "D" ], run = "plugin yamb -- delete_by_fzf", desc = "Delete bookmark by fzf" },
+    { on = [ "u", "A" ], run = "plugin yamb -- delete_all", desc = "Delete all bookmarks" },
+    { on = [ "u", "r" ], run = "plugin yamb -- rename_by_key", desc = "Rename bookmark by key" },
+    { on = [ "u", "R" ], run = "plugin yamb -- rename_by_fzf", desc = "Rename bookmark by fzf" },
+
+    { on = "H", run = "plugin duckdb -1", desc = "Scroll one column to the left" },
+    { on = "L", run = "plugin duckdb +1", desc = "Scroll one column to the right" },
+    { on = ["g", "o"], run = "plugin duckdb -open", desc = "open with duckdb" },
+    { on = ["g", "u"], run = "plugin duckdb -ui", desc = "open with duckdb ui" },
+
+    { on = ["x", "c" ], run  = "plugin sidecar", desc = "Tilføj en beskrivelse i en sidecar-fil" },
+]

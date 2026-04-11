@@ -1,0 +1,40 @@
+-- 1. En synkron funktion der lyn-henter den valgte fil fra 'cx'
+local get_hovered = ya.sync(function()
+	local h = cx.active.current.hovered
+	if h then
+		-- Returner den fulde sti og filnavnet
+		return tostring(h.url), h.name
+	end
+	return nil, nil
+end)
+
+-- 2. Vores asynkrone hovedfunktion
+return {
+	entry = function(self)
+		-- Kald den synkrone funktion for at få filinfo
+		local url, name = get_hovered()
+		if not url then return end
+
+		local sidecar_path = url .. ".txt"
+
+		-- Åbn input-boksen (dette pauser scriptet og venter på brugeren)
+		local value, event = ya.input({
+			title = "Beskrivelse til " .. name,
+			position = { "top-center", y = 3, w = 40 },
+		})
+
+		-- event == 1 betyder at brugeren trykkede 'Enter'
+		if event == 1 then
+			local f = io.open(sidecar_path, "w")
+			if f then
+				f:write(value)
+				f:close()
+				ya.notify({
+					title = "Sidecar gemt",
+					content = "Notat gemt til " .. name .. ".txt",
+					timeout = 3,
+				})
+			end
+		end
+	end
+}
