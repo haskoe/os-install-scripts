@@ -29,7 +29,7 @@ winget install -e --id ElementLabs.LMStudio
 winget install -e --id Mozilla.Thunderbird
 winget install -e --id jdx.mise
 winget install -e --id sharkdp.fd
-
+winget install -e --id wez.wezterm
 
 
 Enable-ComputerRestore -Drive "C:\"
