@@ -1,3 +1,4 @@
+
 registry "receive updates for other microsoft products"
 
 ms-settings:windowsupdate 
@@ -11,11 +12,19 @@ https://github.com/microsoft/winget-cli/releases
 winget install -e --id Google.Chrome
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Citrix.Workspace
+winget install -e --id sharkdp.fd
+winget install -e --id Tailscale.Tailscale
+winget install -e --id BurntSushi.ripgrep.MSVC
+winget install -e --id RustDesk.RustDesk
+winget install -e --id Git.Git
+winget install -e --id 7zip.7zip
+winget install -e --id REALiX.HWiNFO
+winget install -e --id jdx.mise
+winget install -e --id wez.wezterm
+
+winget install -e --id Python.Python.3.14
 winget install -e --id Microsoft.DotNet.SDK.8
 winget install -e --id Microsoft.VisualStudio.2022.Community
-winget install -e --id RustDesk.RustDesk
-winget install -e --id Python.Python.3.14
-winget install -e --id Git.Git
 winget install -e --id TortoiseGit.TortoiseGit
 winget install -e --id SMPlayer.SMPlayer
 winget install -e --id OBSProject.OBSStudio
@@ -28,8 +37,18 @@ winget install -e --id ggml.llamacpp
 winget install -e --id ElementLabs.LMStudio
 winget install -e --id Mozilla.Thunderbird
 winget install -e --id jdx.mise
-winget install -e --id sharkdp.fd
-winget install -e --id wez.wezterm
+
+ssh-keygen -t ed25519 -C "din_email@eksempel.dk"
+$user=""
+$remotehost=""
+$pubKey = Get-Content "$env:USERPROFILE\.ssh\id_ed25519.pub"
+ssh $user@$remotehost "echo '' >> .ssh/authorized_keys && echo '$pubKey' >> .ssh/authorized_keys"
+
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+Start-Service ssh-agent
+Set-Service -Name ssh-agent -StartupType Automatic
+
+ssh-add $env:USERPROFILE\.ssh\id_ed25519
 
 
 Enable-ComputerRestore -Drive "C:\"
