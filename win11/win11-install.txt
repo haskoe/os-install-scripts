@@ -1,3 +1,4 @@
+
 registry "receive updates for other microsoft products"
 
 ms-settings:windowsupdate 
@@ -37,7 +38,14 @@ winget install -e --id ElementLabs.LMStudio
 winget install -e --id Mozilla.Thunderbird
 winget install -e --id jdx.mise
 
+ssh-keygen -t ed25519 -C "din_email@eksempel.dk"
+$user=""
+$remotehost=""
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh $user@$remotehost "cat >> .ssh/authorized_keys"
 
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+Start-Service ssh-agent
+Set-Service -Name ssh-agent -StartupType Automatic
 
 Enable-ComputerRestore -Drive "C:\"
 Get-ComputerRestorePoint
